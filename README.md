@@ -1,47 +1,182 @@
-# 311 Service Request Spatial Analytics Pipeline
+# 311 Spatial Analytics Pipeline
 
-This repository documents an R-based spatial analytics project that uses 311 service request data to study neighborhood-level urban health determinants in Oakland, California.
+A reproducible spatial analytics pipeline for investigating neighborhood health determinants using municipal 311 service requests and Small Area Estimation (SAE).
 
-This project was presented at AAG 2024 as  
-**[A Civic Stethoscope for Healthy City: Utilizing 311 Requests to Monitor Neighborhood Health Determinants](https://drive.google.com/file/d/14ieHtIqg9TCMkLTe5ZJqOWUIEkAvD9n4/view?usp=drive_link)**.
+This project was presented at **AAG 2024** as
 
-## Project Overview
+**[A Civic Stethoscope for Healthy City: Utilizing 311 Requests to Monitor Neighborhood Health Determinants](https://drive.google.com/file/d/14ieHtIqg9TCMkLTe5ZJqOWUIEkAvD9n4/view?usp=drive_link)**
 
-311 service requests provide high-resolution records of local urban conditions, including issues such as illegal dumping, street maintenance, sewer problems, traffic signals, trees, and other non-emergency municipal concerns.
+---
 
-This project explores whether these records can serve as neighborhood-scale indicators of urban well-being and mental health-related spatial patterns.
+# Project Overview
 
-## Research Workflow
+Municipal 311 service requests provide high-resolution records of neighborhood conditions, including illegal dumping, abandoned vehicles, street maintenance, sewer problems, traffic signals, tree maintenance, and other non-emergency public service requests.
 
-The analysis follows four main steps:
+Rather than treating these reports as isolated service events, this project investigates whether 311 requests can serve as neighborhood-level indicators of urban health determinants.
 
-1. Preprocess Oakland 311 service request records and aggregate request categories to neighborhood spatial units.
-2. Use PCA and K-means clustering to identify major reporting patterns and neighborhood profiles.
-3. Test spatial associations between 311 request categories and mental health estimates using OLS and Moran's I.
-4. Build spatial regression models, including SLM, SEM, and SDM, and evaluate hotspot prediction using Getis-Ord Gi*.
+The repository implements a complete spatial analytics pipeline that integrates Small Area Estimation, spatial feature engineering, dimensionality reduction, spatial econometric modeling, and hotspot analysis.
 
-## Methods
+---
 
+# Pipeline Overview
+
+```text
+                    SMART BRFSS Survey
+                            │
+                            ▼
+                Python Data Preparation
+                            │
+                            ▼
+                  GLMM (glmmTMB)
+                            │
+                            ▼
+      Multilevel Regression with Poststratification
+                      (Small Area Estimation)
+                            │
+                            ▼
+       Neighborhood Mental Health Estimates
+                            │
+                            ▼
+            311 Data Preprocessing (Python)
+                            │
+                            ▼
+        PCA + K-means Feature Extraction
+                            │
+                            ▼
+           OLS + Moran's I Analysis
+                            │
+                            ▼
+     Spatial Model Selection (SLM / SEM / SDM)
+                            │
+                            ▼
+          Hotspot Analysis & Validation
+```
+
+---
+
+# Methodology
+
+## Small Area Estimation (SAE)
+
+Neighborhood-level mental health prevalence was estimated using **Multilevel Regression with Poststratification (MRP)**.
+
+The workflow consisted of three stages:
+
+1. Fit a Generalized Linear Mixed Model (GLMM) using **glmmTMB**.
+
+2. Predict mental health prevalence across demographic groups while accounting for hierarchical geographic variation.
+
+3. Apply poststratification using Census population distributions to estimate neighborhood-level prevalence.
+
+These estimates served as the neighborhood-level outcome variables for the subsequent spatial analyses.
+
+---
+
+## Spatial Analytics
+
+The estimated mental health prevalence was linked with municipal 311 service request records through a reproducible spatial analytics workflow.
+
+Major analytical components include:
+
+- Data preprocessing
+- Spatial feature engineering
 - Principal Component Analysis (PCA)
 - K-means clustering
 - Ordinary Least Squares (OLS)
-- Moran's I spatial autocorrelation test
+- Moran's I spatial autocorrelation
 - Spatial Lag Model (SLM)
 - Spatial Error Model (SEM)
 - Spatial Durbin Model (SDM)
 - Getis-Ord Gi* hotspot analysis
-- Confusion matrix evaluation for hotspot and coldspot prediction
+- Confusion matrix validation
 
-## Tools
+---
 
+# Technology Stack
+
+### Programming
+
+- Python
 - R
-- R spatial/statistical packages
-- ArcGIS Pro for map preparation and visualization
 
-## Presentation
+### Statistical Modeling
 
-This work was presented at the **American Association of Geographers Annual Meeting 2024** in Honolulu, Hawaiʻi.
+- GLMM (glmmTMB)
+- Multilevel Regression with Poststratification (MRP)
 
-## Repository Purpose
+### Spatial Analysis
 
-This repository is intended to organize the research workflow, code structure, and project documentation for the 311 spatial analytics project. It highlights how public municipal service records can be transformed into spatial indicators for neighborhood-level analysis.
+- Principal Component Analysis (PCA)
+- K-means Clustering
+- Moran's I
+- Spatial Econometric Models
+- Getis-Ord Gi*
+
+### GIS
+
+- ArcGIS Pro
+
+---
+
+# Repository Structure
+
+```text
+311-spatial-analytics/
+
+├── code/
+│   ├── 1_DataPreprocessing_for_MLR.ipynb
+│   ├── 2_data_for_prediction.ipynb
+│   ├── 3_fit_model_Rmarkdown.Rmd
+│   ├── 4_data_for_calculating_prevalence.ipynb
+│   ├── 5.1_311_data_preprocessing.ipynb
+│   ├── 5.2_OLS_data_preparation.ipynb
+│   ├── 6.1_OLS+Moran'sI.Rmd
+│   └── 6.2_spatial_model_selection.Rmd
+│
+├── data/
+│   ├── Raw datasets
+│   └── Processed datasets
+│
+├── output/
+│   ├── Model outputs
+│   ├── Statistical summaries
+│   └── Validation results
+│
+├── figures/
+│   ├── Maps
+│   ├── Figures
+│   └── Visualizations
+│
+├── publication_figures/
+│   └── Adobe Illustrator files
+│
+├── tables/
+│   └── Tables used in manuscript
+│
+├── 311_dictionary/
+│   └── Variable descriptions
+│
+└── README.md
+```
+
+---
+
+# Project Highlights
+
+- Built an end-to-end spatial analytics pipeline combining Python, R, and GIS workflows.
+- Estimated neighborhood-level mental health prevalence using Small Area Estimation (MRP).
+- Engineered spatial indicators from large-scale municipal 311 service request records.
+- Compared multiple spatial econometric models to quantify neighborhood-level spatial relationships.
+- Presented the project at the **American Association of Geographers (AAG) Annual Meeting 2024**.
+
+---
+
+# Future Work
+
+Future development will focus on:
+
+- Refactoring notebooks into reusable Python and R modules
+- Automating the end-to-end spatial analytics workflow
+- Extending the framework to additional cities
+- Incorporating spatiotemporal modeling
+- Developing an interactive WebGIS interface for spatial exploration
