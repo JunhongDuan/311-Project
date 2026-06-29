@@ -170,13 +170,3 @@ Major analytical components include:
 - Presented the project at the **American Association of Geographers (AAG) Annual Meeting 2024**.
 
 ---
-
-# Future Work
-
-Future development will focus on:
-
-- Refactoring notebooks into reusable Python and R modules
-- Automating the end-to-end spatial analytics workflow
-- Extending the framework to additional cities
-- Incorporating spatiotemporal modeling
-- Developing an interactive WebGIS interface for spatial exploration
