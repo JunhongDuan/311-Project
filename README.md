@@ -2,7 +2,8 @@
 
 This repository documents an R-based spatial analytics project that uses 311 service request data to study neighborhood-level urban health determinants in Oakland, California.
 
-The project was presented at AAG 2024 as **"A Civic Stethoscope for Healthy City: Utilizing 311 Requests to Monitor Neighborhood Health Determinants."**
+The project was presented at AAG 2024 as \textbf{\href{https://drive.google.com/file/d/14ieHtIqg9TCMkLTe5ZJqOWUIEkAvD9n4/view?usp=drive_link}
+{A Civic Stethoscope for Healthy City: Utilizing 311 Requests to Monitor Neighborhood Health Determinants}}
 
 ## Project Overview
 
