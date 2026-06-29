@@ -143,18 +143,11 @@ Major analytical components include:
 │   └── Validation results
 │
 ├── figures/
+│   ├── Tables used in manuscript
 │   ├── Maps
 │   ├── Figures
+│   ├── Adobe Illustrator files
 │   └── Visualizations
-│
-├── publication_figures/
-│   └── Adobe Illustrator files
-│
-├── tables/
-│   └── Tables used in manuscript
-│
-├── 311_dictionary/
-│   └── Variable descriptions
 │
 └── README.md
 ```
