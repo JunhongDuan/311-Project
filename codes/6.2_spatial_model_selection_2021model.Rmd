@@ -1,0 +1,85 @@
+---
+title: "6.2_spatial_model_selection_2021model"
+author: "Junhong Duan"
+date: "2024-09-05"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r cars}
+library(sf) #to import shapefiles
+library(spdep) #for spatial weights, spatial autocorrelation
+library(spatialreg) #for spatial regression
+library(lmtest) #for LM test
+library(sp)
+library(ggplot2)
+library(viridisLite)
+library(viridis)
+library(dplyr)
+library(beepr)
+library(tidyverse)
+library(sf)
+library(spdep)
+library(RColorBrewer)
+library(spatialreg)
+```
+
+
+## create spatial matrix
+```{r}
+cbshape_sf <- st_read("../Data/311_Oakland/data_2021_ready_for_spatialModel.shp")#--------------------------改---------------------------
+cbshape_sf_no_na <- cbshape_sf[!is.na(cbshape_sf$MH_prevale), ]
+row.names(cbshape_sf_no_na) <- cbshape_sf_no_na$GEOID10
+coords <- st_coordinates(st_centroid(cbshape_sf_no_na))
+dist_matrix <- as.matrix(dist(coords))
+threshold = 1000
+adj_matrix_1000 <- matrix(0, nrow = nrow(dist_matrix), ncol = ncol(dist_matrix))
+for (i in 1:nrow(dist_matrix)) {
+  for (j in 1:ncol(dist_matrix)) {
+    if (dist_matrix[i, j] <= 1000) {
+      adj_matrix_1000[i, j] <- 1  # 临界距离内的权重设置为1
+    } else {
+      adj_matrix_1000[i, j] <- 1 / (dist_matrix[i, j] + 1e-10)  # 临界距离之外的权重按反距离设置
+    }
+  }
+}
+diag(adj_matrix_1000) <- 0
+listw_1000 <- mat2listw(adj_matrix_1000, style = "W")
+
+# threshold = 2200
+adj_matrix_2200 <- matrix(0, nrow = nrow(dist_matrix), ncol = ncol(dist_matrix))
+for (i in 1:nrow(dist_matrix)) {
+  for (j in 1:ncol(dist_matrix)) {
+    if (dist_matrix[i, j] <= 2200) {
+      adj_matrix_2200[i, j] <- 1  # 临界距离内的权重设置为1
+    } else {
+      adj_matrix_2200[i, j] <- 1 / (dist_matrix[i, j] + 1e-10)  # 临界距离之外的权重按反距离设置
+    }
+  }
+}
+diag(adj_matrix_2200) <- 0
+listw_2200 <- mat2listw(adj_matrix_2200, style = "W")
+
+# threshold = 3000
+adj_matrix_3000 <- matrix(0, nrow = nrow(dist_matrix), ncol = ncol(dist_matrix))
+for (i in 1:nrow(dist_matrix)) {
+  for (j in 1:ncol(dist_matrix)) {
+    if (dist_matrix[i, j] <= 3000) {
+      adj_matrix_3000[i, j] <- 1  # 临界距离内的权重设置为1
+    } else {
+      adj_matrix_3000[i, j] <- 1 / (dist_matrix[i, j] + 1e-10)  # 临界距离之外的权重按反距离设置
+    }
+  }
+}
+diag(adj_matrix_3000) <- 0
+listw_3000 <- mat2listw(adj_matrix_3000, style = "W")
+
+## 保存邻接矩阵
+saveRDS(listw_1000, file = "../spatial matrix/2021/CB_listw_1000.rds") 
+saveRDS(listw_2200, file = "../spatial matrix/2021/CB_listw_2200.rds") 
+saveRDS(listw_3000, file = "../spatial matrix/2021/CB_listw_3000.rds") 
+```

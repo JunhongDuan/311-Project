@@ -1,0 +1,107 @@
+---
+title: "3_model_fit"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# library(tmbstan)
+library(glmmTMB)
+library(parallel)
+library(MASS)
+```
+预测数据导入
+```{r}
+#2015 all races:
+data_p_2015 <- read.csv("../data_for_prediction/combined/add_ctPoverty_combined_2015_df.csv")
+#2016 all races:
+data_p_2016 <- read.csv("../data_for_prediction/combined/add_ctPoverty_combined_2016_df.csv")
+#2017 all races:
+data_p_2017 <- read.csv("../data_for_prediction/combined/add_ctPoverty_combined_2017_df.csv")
+#2018 all races:
+data_p_2018 <- read.csv("../data_for_prediction/combined/add_ctPoverty_combined_2018_df.csv")
+#2019 all races:
+data_p_2019 <- read.csv("../data_for_prediction/combined/add_ctPoverty_combined_2019_df.csv")
+#2020 all races:
+data_p_2020 <- read.csv("../data_for_prediction/combined/add_ctPoverty_combined_2020_df.csv")
+#2021 all races:
+data_p_2021 <- read.csv("../data_for_prediction/combined/add_ctPoverty_combined_2021_df.csv")
+```
+
+```{r}
+# 使用county数据集合成的MMSA poverty数据重新拟合+预测：
+data <- read.csv('../data for modeling/brfss_2019_ready_to_fit_model.csv')
+#data <- read.csv('../data for modeling/brfss_2021_ready_to_fit_model.csv')
+str(data)
+data$AGE <- as.factor(data$AGE)
+data$SEX <- as.factor(data$SEX)
+data$RACE <- as.factor(data$RACE)
+data$MENTLE <- as.factor(data$MENTLE)
+data$MMSA <- as.factor(data$X_MMSA)
+data$STATE <- as.factor(data$STATE)
+# 未考虑权重的模型：
+model <- glmmTMB(MENTLE ~ AGE + SEX + RACE + PER_LOWPOVERTY + (1 | MMSA)  + (1 | STATE), data = data, family = binomial)
+summary(model)
+```
+
+处理预测数据
+```{r}
+#race_year <- "white_2015"
+data_p <- data_p_2021
+year <- 2021
+str(data_p)
+data_p$AGE <- as.factor(data_p$AGEG5YR)
+data_p$SEX <- as.factor(data_p$X_SEX)
+data_p$RACE <- as.factor(data_p$X_MRACE1)
+data_p$MMSA <- as.factor(data_p$X_MMSA)
+data_p$STATE <- as.factor(data_p$STATE)
+# 蒙特卡洛
+# Extract the fixed effect estimates and variance-covariance matrix
+fixef_est <- fixef(model)$cond
+vcov_est <- vcov(model)$cond
+
+# Function to generate predictions based on sampled parameters
+generate_predictions <- function(fixef_sample, newdata) {
+  # Create a model matrix from newdata
+  X <- model.matrix(~ AGE + SEX + RACE + PER_LOWPOVERTY, data = newdata)
+  # Calculate the linear predictor
+  eta <- X %*% fixef_sample
+  # Convert to predicted probabilities
+  pred_prob <- 1 / (1 + exp(-eta))
+  return(pred_prob)
+}
+# Prepare an empty matrix to store the predictions
+n <- nrow(data_p)
+predictions_matrix <- matrix(NA, nrow = n, ncol = 1000)
+# Monte Carlo simulation with 5 rounds
+set.seed(123)  # For reproducibility
+for (i in 1:1000) {
+  # Draw a sample of the fixed effects parameters
+  fixef_sample <- MASS::mvrnorm(1, mu = fixef_est, Sigma = vcov_est)
+  # Generate predictions
+  predictions_matrix[, i] <- generate_predictions(fixef_sample, data_p)
+}
+# Compute the mean predictions for each observation (each census block)
+mean_predictions <- rowMeans(predictions_matrix)
+# Calculate the standard error of the predictions for each observation
+se_predictions <- apply(predictions_matrix, 1, sd) / sqrt(5)
+# Compute the 95% confidence intervals
+alpha <- 0.05
+z_score <- qnorm(1 - alpha / 2)
+lower_bound <- mean_predictions - z_score * se_predictions
+upper_bound <- mean_predictions + z_score * se_predictions
+# Combine the results into a data frame
+prediction_results <- data.frame(
+  Observation = 1:nrow(data_p),
+  Mean_Prediction = mean_predictions,
+  SE_Prediction = se_predictions,
+  Lower_CI = lower_bound,
+  Upper_CI = upper_bound
+)
+data_p$predicted_risk <- prediction_results[,2]
+# print(data_p)
+write.csv(data_p, paste0("../health_after_prediction/MH_CB_prediction_",year,".csv"))
+```

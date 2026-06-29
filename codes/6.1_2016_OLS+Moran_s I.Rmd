@@ -1,0 +1,114 @@
+---
+title: "6.1_2016_OLS+Moran's I"
+author: "Junhong Duan"
+date: "2024-09-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+library(sf) #to import shapefiles
+library(spdep) #for spatial weights, spatial autocorrelation
+library(spatialreg) #for spatial regression
+library(lmtest) #for LM test
+library(sp)
+
+```
+## OLS
+```{r}
+run_ols_and_check_pvalues <- function(file_path) {
+  year <- sub(".*data_(\\d{4})_.*", "\\1", file_path)
+  print(paste0("**************", year, "**************"))
+  
+  output_file <- paste0("../spatial matrix/", year, "/output_", year, ".txt")
+  sink(output_file)  # 重定向输出到文件
+  
+  cbshape_sf <- st_read(file_path)
+  cbshape_sf_no_na <- cbshape_sf[!is.na(cbshape_sf$MH_prevale), ]
+  row.names(cbshape_sf_no_na) <- cbshape_sf_no_na$GEOID10
+  coords <- st_coordinates(st_centroid(cbshape_sf_no_na))
+  
+  # *********************spatial matrix*********************
+  dist_matrix <- as.matrix(dist(coords))
+  # threshold = 1600
+  adj_matrix_1600 <- matrix(0, nrow = nrow(dist_matrix), ncol = ncol(dist_matrix))
+  for (i in 1:nrow(dist_matrix)) {
+    for (j in 1:ncol(dist_matrix)) {
+      if (dist_matrix[i, j] <= 1600) {
+        adj_matrix_1600[i, j] <- 1  # 临界距离内的权重设置为1
+      } else {
+        adj_matrix_1600[i, j] <- 1 / (dist_matrix[i, j] + 1e-10)  # 临界距离之外的权重按反距离设置
+      }
+    }
+  }
+  diag(adj_matrix_1600) <- 0
+  listw_1600 <- mat2listw(adj_matrix_1600, style = "W")
+  print("*********************spatial matrix completion!*********************")
+  saveRDS(listw_1600, file = paste0("../spatial matrix/", year ,"/CB_listw_1600.rds"))
+  # *********************spatial matrix ENDS!*********************
+  
+  # List to store important variables
+  for (col in names(cbshape_sf_no_na)[18:(ncol(cbshape_sf_no_na)-4)]) {
+    # Run OLS
+    col_selected <- c("PARKING", "SEWERS", "PARKS", "CUT_CLEAN", "TREES", 
+                "ROW_INSPEC", "DRAINAGE", "TRAFFIC", 
+                "ROW_STREET", "WATERSHED", "BLDGMAINT", "METER_REPA", 
+                "STREETSW", "RECYCLING", "ELECTRICAL", "ILLDUMP", "FIRE", 
+                "KOCB", "TRAFFIC_EN", "GRAFFITI")
+    if (col %in% col_selected){
+      formula <- as.formula(paste("MH_prevale ~", col))
+      model <- lm(formula, data = cbshape_sf_no_na)
+      model_summary <- summary(model)
+      print(coef(model_summary))
+      
+      moran_test <- lm.morantest(model, listw_1600, zero.policy = TRUE, alternative = "two.sided")
+      print(moran_test)
+      moran_p_value <- moran_test$p.value[1]
+      print(year)
+      print(rownames(coef(model_summary))[2])#打印变量名
+      if (moran_p_value < 0.05){
+        print(paste("Significant spatial autocorrelation exist in residuals (Moran I)", moran_p_value))
+      }else{
+        print("NO significant spatial autocorrelation exist in residuals (Moran I)")
+      }
+      if (!is.na(coef(model)[2]) && coef(model_summary)[8] < 0.05){
+        print(paste("Significant relationship with Mental Health Prevalence (OLS)", coef(model_summary)[8]))
+      }else{
+        print("NO significant relationship with Mental Health Prevalence (OLS)")
+      }
+    }
+    # formula <- as.formula(paste("MH_prevalence ~", col))
+    # model <- lm(formula, data = cbshape_sf_no_na)
+    # # Get summary
+    # model_summary <- summary(model)
+    # # Check if the coefficient is not NA and p-value is less than 0.05
+    # if (!is.na(coef(model)[2]) && coef(model_summary)[8] < 0.05) {
+    #   print(year)
+    #   print(names(coef(model_summary))[2])
+    #   important_vars[[paste(year, col, sep = "_")]] <- coef(model_summary)
+    #   print(coef(model_summary))
+    # }
+  }
+  sink()  # 关闭输出重定向
+}
+# File paths for 2015-2021
+file_paths <- list(
+  #"../Data/311_Oakland/data_2015_ready_for_spatialModel.shp",
+  "../Data/311_Oakland/data_2016_ready_for_spatialModel.shp"
+  #"../Data/311_Oakland/data_2017_ready_for_spatialModel.shp",
+  #"../Data/311_Oakland/data_2018_ready_for_spatialModel.shp"
+  #"../Data/311_Oakland/data_2019_ready_for_spatialModel.shp"
+  #"../Data/311_Oakland/data_2020_ready_for_spatialModel.shp",
+  #"../Data/311_Oakland/data_2021_ready_for_spatialModel.shp"
+)
+
+results <- lapply(file_paths, function(fp) {
+  tryCatch(run_ols_and_check_pvalues(fp), error = function(e) {
+    warning(paste("Error in processing file:", fp, "Error message:", e$message))
+    return(NULL)
+  })
+})
+```

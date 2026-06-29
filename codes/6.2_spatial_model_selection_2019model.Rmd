@@ -1,0 +1,477 @@
+---
+title: "6.2_spatial_model_selection_2019model"
+author: "Junhong Duan"
+date: "2024-09-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+library(sf) #to import shapefiles
+library(spdep) #for spatial weights, spatial autocorrelation
+library(spatialreg) #for spatial regression
+library(lmtest) #for LM test
+library(sp)
+library(ggplot2)
+library(viridisLite)
+library(viridis)
+library(dplyr)
+library(beepr)
+library(tidyverse)
+library(sf)
+library(spdep)
+library(RColorBrewer)
+library(spatialreg)
+```
+
+## create spatial matrix
+```{r}
+cbshape_sf <- st_read("../Data/311_Oakland/data_2019_ready_for_spatialModel.shp")#--------------------------改---------------------------
+cbshape_sf_no_na <- cbshape_sf[!is.na(cbshape_sf$MH_prevale), ]
+row.names(cbshape_sf_no_na) <- cbshape_sf_no_na$GEOID10
+coords <- st_coordinates(st_centroid(cbshape_sf_no_na))
+dist_matrix <- as.matrix(dist(coords))
+threshold = 1000
+adj_matrix_1000 <- matrix(0, nrow = nrow(dist_matrix), ncol = ncol(dist_matrix))
+for (i in 1:nrow(dist_matrix)) {
+  for (j in 1:ncol(dist_matrix)) {
+    if (dist_matrix[i, j] <= 1000) {
+      adj_matrix_1000[i, j] <- 1  # 临界距离内的权重设置为1
+    } else {
+      adj_matrix_1000[i, j] <- 1 / (dist_matrix[i, j] + 1e-10)  # 临界距离之外的权重按反距离设置
+    }
+  }
+}
+diag(adj_matrix_1000) <- 0
+listw_1000 <- mat2listw(adj_matrix_1000, style = "W")
+
+# threshold = 2200
+adj_matrix_2200 <- matrix(0, nrow = nrow(dist_matrix), ncol = ncol(dist_matrix))
+for (i in 1:nrow(dist_matrix)) {
+  for (j in 1:ncol(dist_matrix)) {
+    if (dist_matrix[i, j] <= 2200) {
+      adj_matrix_2200[i, j] <- 1  # 临界距离内的权重设置为1
+    } else {
+      adj_matrix_2200[i, j] <- 1 / (dist_matrix[i, j] + 1e-10)  # 临界距离之外的权重按反距离设置
+    }
+  }
+}
+diag(adj_matrix_2200) <- 0
+listw_2200 <- mat2listw(adj_matrix_2200, style = "W")
+
+# threshold = 3000
+adj_matrix_3000 <- matrix(0, nrow = nrow(dist_matrix), ncol = ncol(dist_matrix))
+for (i in 1:nrow(dist_matrix)) {
+  for (j in 1:ncol(dist_matrix)) {
+    if (dist_matrix[i, j] <= 3000) {
+      adj_matrix_3000[i, j] <- 1  # 临界距离内的权重设置为1
+    } else {
+      adj_matrix_3000[i, j] <- 1 / (dist_matrix[i, j] + 1e-10)  # 临界距离之外的权重按反距离设置
+    }
+  }
+}
+diag(adj_matrix_3000) <- 0
+listw_3000 <- mat2listw(adj_matrix_3000, style = "W")
+
+## 保存邻接矩阵
+saveRDS(listw_1000, file = "../spatial matrix/2019/CB_listw_1000.rds") 
+saveRDS(listw_2200, file = "../spatial matrix/2019/CB_listw_2200.rds") 
+saveRDS(listw_3000, file = "../spatial matrix/2019/CB_listw_3000.rds") 
+```
+
+## spatial dependence dignosis
+```{r}
+cbshape_sf <- st_read("../Data/311_Oakland/data_2019_ready_for_spatialModel.shp")#--------------------------改---------------------------
+cbshape_sf_no_na <- cbshape_sf[!is.na(cbshape_sf$MH_prevale), ]
+formulas <- list(
+  MH_prevale ~ STREETSW,
+  MH_prevale ~ METER_REPA,
+  MH_prevale ~ TREES,
+  MH_prevale ~ ILLDUMP,
+  MH_prevale ~ DRAINAGE,
+  MH_prevale ~ SEWERS,
+  MH_prevale ~ FIRE,
+  MH_prevale ~ ELECTRICAL,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ILLDUMP + METER_REPA + SEWERS + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ILLDUMP + METER_REPA + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + TREES
+)
+listw_1000 <- readRDS(file = "../spatial matrix/2019/CB_listw_1000.rds")
+listw_1600 <- readRDS(file = "../spatial matrix/2019/CB_listw_1600.rds")
+listw_2200 <- readRDS(file = "../spatial matrix/2019/CB_listw_2200.rds")
+listw_3000 <- readRDS(file = "../spatial matrix/2019/CB_listw_3000.rds")
+
+listws <- list(
+  listw_1000,
+  listw_1000,
+  listw_1600,
+  listw_1600,
+  listw_2200,
+  listw_2200,
+  listw_2200,
+  listw_3000,
+  listw_1600,
+  listw_1600,
+  listw_1600,
+  listw_1600,
+  listw_1600,
+  listw_1600
+)
+names <- list(
+  'STR',
+  'MET',
+  'TRE',
+  'ILL',
+  'DRA',
+  'SEW',
+  'FIR',
+  'ELE',
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F'
+)
+
+library(spatialreg)
+library(lmtest)
+
+output_file <- paste0("../spatial diagnosis/output_2019model.txt")
+sink(output_file)
+  
+# model <- lm(MH_prevale ~ X, data = cbshape_sf_no_na)
+for (i in 1:(length(formulas))) {
+  
+  
+  print("*************************************")
+  print(names[[i]])
+  
+  X <- as.formula(formulas[[i]])
+  listw <- listws[[i]]
+  model <- lm(X, data = cbshape_sf_no_na)
+  lm_tests <- lm.RStests (model, listw = listw, test = c("LMlag", "LMerr", "RLMlag", "RLMerr"))
+  summary(lm_tests)
+  
+  lm_lag_test <- lm_tests$RSlag
+  lm_err_test <- lm_tests$RSerr
+  robust_lm_lag_test <- lm_tests$adjRSlag 
+  robust_lm_err_test <- lm_tests$adjRSerr 
+  
+  # Print p-values
+  print(paste("P-value for LMlag test:", lm_lag_test$p.value))
+  print(paste("P-value for LMerr test:", lm_err_test$p.value))
+  print(paste("P-value for Robust LMlag test:", robust_lm_lag_test$p.value))
+  print(paste("P-value for Robust LMerr test:", robust_lm_err_test$p.value))
+ 
+}
+
+
+sink()
+```
+
+## run models
+```{r}
+cbshape_sf <- st_read("../Data/311_Oakland/data_2019_ready_for_spatialModel.shp")#--------------------------改---------------------------
+cbshape_sf_no_na <- cbshape_sf[!is.na(cbshape_sf$MH_prevale), ]
+
+output_file <- paste0("../spatial model selection/output_2019model.txt")
+sink(output_file)
+
+formulas <- list(
+  MH_prevale ~ STREETSW,
+  MH_prevale ~ METER_REPA,
+  MH_prevale ~ TREES,
+  MH_prevale ~ ILLDUMP,
+  MH_prevale ~ DRAINAGE,
+  MH_prevale ~ SEWERS,
+  MH_prevale ~ FIRE,
+  MH_prevale ~ ELECTRICAL,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ILLDUMP + METER_REPA + SEWERS + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ILLDUMP + METER_REPA + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + TREES
+)
+listw_1000 <- readRDS(file = "../spatial matrix/2019/CB_listw_1000.rds")
+listw_1600 <- readRDS(file = "../spatial matrix/2019/CB_listw_1600.rds")
+listw_2200 <- readRDS(file = "../spatial matrix/2019/CB_listw_2200.rds")
+listw_3000 <- readRDS(file = "../spatial matrix/2019/CB_listw_3000.rds")
+
+
+listws <- list(
+  listw_1000,
+  listw_1000,
+  listw_1600,
+  listw_1600,
+  listw_2200,
+  listw_2200,
+  listw_2200,
+  listw_3000,
+  listw_1600,
+  listw_1600,
+  listw_1600,
+  listw_1600,
+  listw_1600,
+  listw_1600
+)
+
+names <- list(
+  'STR',
+  'MET',
+  'TRE',
+  'ILL',
+  'DRA',
+  'SEW',
+  'FIR',
+  'ELE',
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F'
+)
+row.names(cbshape_sf_no_na) <- cbshape_sf_no_na$GEOID10
+for (i in 1:(length(formulas))){
+  print("*****************************************")
+  print(names[[i]])
+  X <- as.formula(formulas[[i]])
+  listw <- listws[[i]]
+
+  lag_model <- lagsarlm(X, data = cbshape_sf_no_na, listw = listw, zero.policy = TRUE)
+  print(summary(lag_model))
+  print("finish SLM model fitting")
+  error_model <- errorsarlm(X, data = cbshape_sf_no_na, listw = listw, zero.policy = TRUE)
+  print(summary(error_model))
+  print(moran.mc(residuals(error_model), listws[[i]], zero.policy = TRUE, nsim=999))
+  print("finish SEM model fitting")
+  attr(listw, "region.id") <- cbshape_sf_no_na$GEOID10
+  sdm_model <- lagsarlm(X, data = cbshape_sf_no_na, listw = listw, type = "Durbin", zero.policy = TRUE)
+  print(summary(sdm_model))
+  print("finish SDM model fitting")
+  beep(sound = 3)
+
+  saveRDS(lag_model, file = paste0("../spatial model selection/2019/slm_model_", names[i], ".rds"))
+  saveRDS(error_model, file = paste0("../spatial model selection/2019/sem_model_", names[i], ".rds"))
+  saveRDS(sdm_model, file = paste0("../spatial model selection/2019/sdm_model_", names[i], ".rds"))
+  
+}
+
+sink()
+```
+
+## hotspot analysis
+```{r}
+listw_1000_next <- readRDS(file = "../spatial matrix/2020/CB_listw_1000.rds")
+listw_1600_next <- readRDS(file = "../spatial matrix/2020/CB_listw_1600.rds")
+listw_2200_next <- readRDS(file = "../spatial matrix/2020/CB_listw_2200.rds")
+listw_3000_next <- readRDS(file = "../spatial matrix/2020/CB_listw_3000.rds")
+
+formulas <- list(
+  MH_prevale ~ STREETSW,
+  MH_prevale ~ METER_REPA,
+  MH_prevale ~ TREES,
+  MH_prevale ~ ILLDUMP,
+  MH_prevale ~ DRAINAGE,
+  MH_prevale ~ SEWERS,
+  MH_prevale ~ FIRE,
+  MH_prevale ~ ELECTRICAL,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ILLDUMP + METER_REPA + SEWERS + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ILLDUMP + METER_REPA + STREETSW + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + TREES,
+  MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + TREES
+)
+
+listws_next <- list(
+  listw_1000_next,
+  listw_1000_next,
+  listw_1600_next,
+  listw_1600_next,
+  listw_2200_next,
+  listw_2200_next,
+  listw_2200_next,
+  listw_3000_next,
+  listw_1600_next,
+  listw_1600_next,
+  listw_1600_next,
+  listw_1600_next,
+  listw_1600_next,
+  listw_1600_next
+)
+
+names <- list(
+  'STR',
+  'MET',
+  'TRE',
+  'ILL',
+  'DRA',
+  'SEW',
+  'FIR',
+  'ELE',
+  'A',
+  'B',
+  'C',
+  'D',
+  'E',
+  'F'
+)
+for (i in 1:(length(formulas))) {
+  X <- as.formula(formulas[[i]])
+  listw_next <- listws_next[[i]]
+  lag_model <- readRDS(paste0("../spatial model selection/2019/slm_model_", names[i], ".rds"))
+  error_model <- readRDS(paste0("../spatial model selection/2019/sem_model_", names[i], ".rds"))
+  sdm_model <- readRDS(paste0("../spatial model selection/2019/sdm_model_", names[i], ".rds"))
+  
+  cbshape_sf_next <- st_read("../Data/311_Oakland/data_2020_ready_for_spatialModel.shp")#--------------------------改-----------------------
+  cbshape_sf_no_na_next <- cbshape_sf_next[!is.na(cbshape_sf_next$MH_prevale), ]
+  row.names(cbshape_sf_no_na_next) <- cbshape_sf_no_na_next$GEOID10
+  
+  attr(listw_next, "region.id") <- cbshape_sf_no_na_next$GEOID10
+  
+  predicted_values_lag <- predict(lag_model, newdata = cbshape_sf_no_na_next, listw = listw_next, zero.policy = TRUE, legacy.mixed=TRUE)
+  save(predicted_values_lag, file = paste0("../hotspot prediction/model2019_pred2020/predicted_", names[i], "_SLM.RData"))
+  print("finish SLM model predicting")
+
+  predicted_values_err <- predict(error_model, newdata = cbshape_sf_no_na_next, listw = listw_next, zero.policy = TRUE, legacy.mixed=TRUE)
+  save(predicted_values_err, file = paste0("../hotspot prediction/model2019_pred2020/predicted_", names[i], "_SEM.RData"))
+  print("finish SEM model predicting")
+  
+  # cbshape_sf_no_na_2021 <- cbshape_sf_no_na_2021[cbshape_sf_no_na_2021$GEOID10 %in% cbshape_sf_no_na$GEOID10, ]
+  attr(listw_next, "region.id") <- row.names(cbshape_sf_no_na_next)
+  
+  predicted_values_durbin <- predict(sdm_model, newdata = cbshape_sf_no_na_next, listw = listw_next, zero.policy = TRUE, legacy.mixed=TRUE)
+  save(predicted_values_durbin, file = paste0("../hotspot prediction/model2019_pred2020/predicted_", names[i], "_refine_SDM.RData"))
+  print("finish SDM model predicting")
+  beep(sound = 3)
+  
+  cbshape_sf_no_na_next$predicted_values_lag <- as.numeric(predicted_values_lag)
+  # p <- ggplot(data = cbshape_sf_no_na_next) +
+  #   geom_sf(aes(fill = predicted_values_lag)) +
+  #   scale_fill_viridis_c() +
+  #   theme_minimal() +
+  #   labs(title = "SLM: Predicted Values of MH_prevale",
+  #        fill = "Predicted Value")
+  # ggsave(filename = paste0("Predicted_value_maps/SLM-Predicted_Values-",names[i],".png"), plot = p, width = 10, height = 8, dpi = 300)
+  # print("finish SLM map")
+  # 
+  cbshape_sf_no_na_next$predicted_values_err <- as.numeric(predicted_values_err)
+  # p1 <- ggplot(data = cbshape_sf_no_na_next) +
+  #   geom_sf(aes(fill = predicted_values_err)) +
+  #   scale_fill_viridis_c() +
+  #   theme_minimal() +
+  #   labs(title = "SEM: Predicted Values of MH_prevale",
+  #        fill = "Predicted Value")
+  # ggsave(filename = paste0("Predicted_value_maps/SEM-Predicted_Values-",names[i],".png"), plot = p1, width = 10, height = 8, dpi = 300)
+  # print("finish SEM map")
+  # 
+  cbshape_sf_no_na_next$predicted_values_durbin <- as.numeric(predicted_values_durbin)
+  # p2 <- ggplot(data = cbshape_sf_no_na_next) +
+  #   geom_sf(aes(fill = predicted_values_durbin)) +
+  #   scale_fill_viridis_c() +
+  #   theme_minimal() +
+  #   labs(title = "SDM: Predicted Values of MH_prevale",
+  #        fill = "Predicted Value")
+  # ggsave(filename = paste0("./maps/SDM-Predicted_Values-",names[i],"_refine.png"), plot = p2, width = 10, height = 8, dpi = 300)
+  # print("finish SDM map")
+  print("-------------------------------------------------")
+  beep(sound = 3)
+}
+
+#提取：
+# slm_loaded <- readRDS("slm_model.rds")
+# summary(readRDS("../Data after OLS and spatial models/sdm_model_STREETSW.rds"))
+
+```
+
+```{r}
+library(tidyverse)
+library(sf)
+library(spdep)
+library(RColorBrewer)
+
+custom_colors <- c(
+    "Hotspot - 99% Confidence" = "#67001F",
+    "Hotspot - 95% Confidence" = "#B2182B",
+    "Hotspot - 90% Confidence" = "#D6604D",
+    "Not Significant" = "#F7F7F7",
+    "Coldspot - 90% Confidence" = "#92C5DE",
+    "Coldspot - 95% Confidence" = "#4393C3",
+    "Coldspot - 99% Confidence" = "#2166AC")
+
+for (i in 1:((length(names)))) {
+  load_path <- paste0("../hotspot prediction/model2019_pred2020/predicted_", names[i], "_refine_SDM.RData")
+  load(load_path)
+  predicted_values_durbin <- as.data.frame(get(ls(pattern = "predicted_values_durbin")))$fit
+  pred_name <- paste0(names[i],"_pred")
+  cbshape_sf_no_na_next[[pred_name]] <- predicted_values_durbin
+}
+
+calculate_gi_star <- function(data, variable, listw) {
+  gi_star <- localG(data[[variable]], listw)
+  gi_star_col <- paste0(variable, "_Gi_star")
+  significance_col <- paste0(variable, "_classification")  # renaming for clarity
+  data[[gi_star_col]] <- gi_star
+  data[[significance_col]] <- case_when(
+    data[[gi_star_col]] >= qnorm(0.995) ~ "Hotspot - 99% Confidence",
+    data[[gi_star_col]] >= qnorm(0.975) ~ "Hotspot - 95% Confidence",
+    data[[gi_star_col]] >= qnorm(0.95) ~ "Hotspot - 90% Confidence",
+    data[[gi_star_col]] <= qnorm(0.005) ~ "Coldspot - 99% Confidence",
+    data[[gi_star_col]] > qnorm(0.005) & data[[gi_star_col]] <= qnorm(0.025) ~ "Coldspot - 95% Confidence",
+    data[[gi_star_col]] > qnorm(0.025) & data[[gi_star_col]] <= qnorm(0.05) ~ "Coldspot - 90% Confidence",
+    TRUE ~ "Not Significant"
+  )
+  return(data)
+}
+
+# perform_hotspot_analysis <- function(data, listw) {
+for (i in 1:((length(names)))){ #(column in columns) {
+    pred_name <- paste0(names[i],"_pred")
+    cbshape_sf_no_na_next <- calculate_gi_star(cbshape_sf_no_na_next, pred_name, listws_next[[i]])
+    column_name <- paste0(pred_name, "_classification")
+    # cbshape_sf_no_na$column_name <- pred_classification
+    
+    plot <- ggplot(cbshape_sf_no_na_next) +
+      geom_sf(aes(fill = .data[[column_name]]), color = "black", lwd = 0.1) +
+      scale_fill_manual(values = custom_colors) +
+      theme_void() +
+      labs(
+        fill = "Hot Spot Classification",
+        title = paste("Getis-Ord Gi* Hotspot Analysis for", pred_name)
+      )
+    print(plot)
+    ggsave(
+      filename = paste("../hotspot prediction/model2019_pred2020/img/Refine_",names[i],".png"),
+      plot = plot,
+      width = 10,    # 图像的宽度，单位为英寸
+      height = 8,    # 图像的高度，单位为英寸
+      dpi = 300      # 分辨率，单位为dpi
+    )
+}
+
+cbshape_sf_no_na_next <- calculate_gi_star(cbshape_sf_no_na_next, "MH_prevale", listw_1600_next)
+plot <- ggplot(cbshape_sf_no_na_next) +
+  geom_sf(aes(fill = .data[["MH_prevale_classification"]]), color = "black", lwd = 0.1) +
+  scale_fill_manual(values = custom_colors) +
+  theme_void() +
+  labs(
+    fill = "Hot Spot Classification",
+    title = paste("Getis-Ord Gi* Hotspot Analysis for Mental Health Prevalence")
+  )
+print(plot)
+ggsave(
+  filename = "../hotspot prediction/model2019_pred2020/img/Refine_MHprev.png",
+  plot = plot,
+  width = 10,    # 图像的宽度，单位为英寸
+  height = 8,    # 图像的高度，单位为英寸
+  dpi = 300      # 分辨率，单位为dpi
+)
