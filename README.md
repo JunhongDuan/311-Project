@@ -1,109 +1,46 @@
-# 311 Spatial Analytics Pipeline
+# 311 Service Request Spatial Analytics Pipeline
 
-A reproducible geospatial analytics pipeline for transforming large-scale 311 service request records into neighborhood-level spatial features for urban pattern discovery and spatial modeling.
+This repository documents an R-based spatial analytics project that uses 311 service request data to study neighborhood-level urban health determinants in Oakland, California.
 
-This project integrates municipal service requests, census demographics, and public health datasets to automate spatial data processing, feature engineering, hotspot detection, and spatial statistical modeling.
+The project was presented at AAG 2024 as **"A Civic Stethoscope for Healthy City: Utilizing 311 Requests to Monitor Neighborhood Health Determinants."**
 
----
+## Project Overview
 
-## Motivation
+311 service requests provide high-resolution records of local urban conditions, including issues such as illegal dumping, street maintenance, sewer problems, traffic signals, trees, and other non-emergency municipal concerns.
 
-311 service requests provide high-resolution observations of urban conditions. This project explores how large-scale geospatial data can be transformed into analytical features that support neighborhood-level spatial analysis and decision making.
+This project explores whether these records can serve as neighborhood-scale indicators of urban well-being and mental health-related spatial patterns.
 
----
+## Research Workflow
 
-## Key Features
+The analysis follows four main steps:
 
-* Automated preprocessing of multi-year 311 service request datasets
-* Spatial aggregation from point observations to census block groups
-* Feature engineering for neighborhood-level spatial indicators
-* Hotspot detection using Getis-Ord Gi*
-* Spatial autocorrelation analysis using Moran's I
-* Spatial regression including OLS, SLM, SEM, and SDM
-* Interactive visualization using ArcGIS StoryMap
+1. Preprocess Oakland 311 service request records and aggregate request categories to neighborhood spatial units.
+2. Use PCA and K-means clustering to identify major reporting patterns and neighborhood profiles.
+3. Test spatial associations between 311 request categories and mental health estimates using OLS and Moran's I.
+4. Build spatial regression models, including SLM, SEM, and SDM, and evaluate hotspot prediction using Getis-Ord Gi*.
 
----
+## Methods
 
-## Technical Stack
+- Principal Component Analysis (PCA)
+- K-means clustering
+- Ordinary Least Squares (OLS)
+- Moran's I spatial autocorrelation test
+- Spatial Lag Model (SLM)
+- Spatial Error Model (SEM)
+- Spatial Durbin Model (SDM)
+- Getis-Ord Gi* hotspot analysis
+- Confusion matrix evaluation for hotspot and coldspot prediction
 
-**Programming**
+## Tools
 
-* Python
-* R
-* SQL
+- R
+- R spatial/statistical packages
+- ArcGIS Pro for map preparation and visualization
 
-**GIS**
+## Presentation
 
-* ArcGIS Pro
-* GeoPandas
-* ArcPy
+This work was presented at the **American Association of Geographers Annual Meeting 2024** in Honolulu, Hawaiʻi.
 
-**Spatial Analysis**
+## Repository Purpose
 
-* PySAL
-* Moran's I
-* Hotspot Analysis
-* Spatial Regression
-
-**Visualization**
-
-* ArcGIS StoryMap
-* Matplotlib
-
----
-
-## Workflow
-
-```
-311 Requests
-        │
-        ▼
-Data Cleaning
-        │
-        ▼
-Spatial Aggregation
-        │
-        ▼
-Feature Engineering
-        │
-        ▼
-Spatial Statistics
-        │
-        ▼
-Spatial Regression
-        │
-        ▼
-Hotspot Detection
-        │
-        ▼
-Visualization
-```
-
----
-
-## Repository Structure
-
-```
-src/
-data/
-outputs/
-docs/
-```
-
----
-
-## Results
-
-* Processed over 2 million geospatial records
-* Generated neighborhood-level spatial indicators
-* Identified significant spatial clusters using Moran's I and Getis-Ord Gi*
-* Developed spatial regression models to quantify relationships between 311 requests and neighborhood mental health
-
----
-
-## Future Work
-
-* Deploy as an interactive WebGIS application
-* Support real-time municipal data ingestion
-* Incorporate graph-based spatial learning methods
-* Extend to multi-city spatial analytics
+This repository is intended to organize the research workflow, code structure, and project documentation for the 311 spatial analytics project. It highlights how public municipal service records can be transformed into spatial indicators for neighborhood-level analysis.
