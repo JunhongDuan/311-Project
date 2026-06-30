@@ -1,0 +1,1418 @@
+[1] "*****************************************"
+[1] "STR"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.12811326 -0.01025840 -0.00026677  0.01065803  0.18435503 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  0.02343929  0.00191817 12.2196   <2e-16
+STREETSW    -0.00016950  0.00011526 -1.4705   0.1414
+
+Rho: 0.8307, LR test value: 2315.7, p-value: < 2.22e-16
+Asymptotic standard error: 0.01368
+    z-value: 60.722, p-value: < 2.22e-16
+Wald statistic: 3687.2, p-value: < 2.22e-16
+
+Log likelihood: 8894.577 for lag model
+ML residual variance (sigma squared): 0.00047252, (sigma: 0.021737)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17781, (AIC for lm: -15467)
+LM test for residual autocorrelation
+test value: 65.407, p-value: 5.5511e-16
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.12803510 -0.01026208 -0.00031963  0.01067354  0.18457728 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  1.3702e-01  2.1174e-03 64.7145   <2e-16
+STREETSW    -4.9953e-05  1.1812e-04 -0.4229   0.6724
+
+Lambda: 0.83185, LR test value: 2313.7, p-value: < 2.22e-16
+Asymptotic standard error: 0.01363
+    z-value: 61.03, p-value: < 2.22e-16
+Wald statistic: 3724.6, p-value: < 2.22e-16
+
+Log likelihood: 8893.591 for error model
+ML residual variance (sigma squared): 0.00047257, (sigma: 0.021739)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17779, (AIC for lm: -15467)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.027748, observed rank = 1, p-value = 0.999
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.12869594 -0.01027943 -0.00027583  0.01062438  0.18415395 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                Estimate  Std. Error z value Pr(>|z|)
+(Intercept)   2.4652e-02  1.9931e-03 12.3688  < 2e-16
+STREETSW     -9.7955e-05  1.1933e-04 -0.8209  0.41171
+lag.STREETSW -6.0238e-04  2.5165e-04 -2.3937  0.01668
+
+Rho: 0.82737, LR test value: 2270.1, p-value: < 2.22e-16
+Asymptotic standard error: 0.013814
+    z-value: 59.892, p-value: < 2.22e-16
+Wald statistic: 3587.1, p-value: < 2.22e-16
+
+Log likelihood: 8897.421 for mixed model
+ML residual variance (sigma squared): 0.00047236, (sigma: 0.021734)
+Number of observations: 3768 
+Number of parameters estimated: 5 
+AIC: -17785, (AIC for lm: -15517)
+LM test for residual autocorrelation
+test value: 61.409, p-value: 4.6629e-15
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "MET"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.12818859 -0.01034682 -0.00040277  0.01057304  0.18443629 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  0.02338802  0.00190771 12.2598 < 2.2e-16
+METER_REPA  -0.00079062  0.00027487 -2.8763  0.004023
+
+Rho: 0.83044, LR test value: 2324.4, p-value: < 2.22e-16
+Asymptotic standard error: 0.013659
+    z-value: 60.799, p-value: < 2.22e-16
+Wald statistic: 3696.5, p-value: < 2.22e-16
+
+Log likelihood: 8897.637 for lag model
+ML residual variance (sigma squared): 0.0004718, (sigma: 0.021721)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17787, (AIC for lm: -15465)
+LM test for residual autocorrelation
+test value: 59.816, p-value: 1.0436e-14
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.12810262 -0.01027940 -0.00033167  0.01067785  0.18275813 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  0.13713381  0.00210635 65.1049 < 2.2e-16
+METER_REPA  -0.00098204  0.00033599 -2.9229  0.003468
+
+Lambda: 0.83197, LR test value: 2324.6, p-value: < 2.22e-16
+Asymptotic standard error: 0.013625
+    z-value: 61.063, p-value: < 2.22e-16
+Wald statistic: 3728.7, p-value: < 2.22e-16
+
+Log likelihood: 8897.768 for error model
+ML residual variance (sigma squared): 0.0004715, (sigma: 0.021714)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17788, (AIC for lm: -15465)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.027254, observed rank = 1, p-value = 0.999
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-0.1281473 -0.0103160 -0.0003747  0.0106239  0.1834285 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                  Estimate  Std. Error z value Pr(>|z|)
+(Intercept)     0.02319022  0.00191105 12.1348  < 2e-16
+METER_REPA     -0.00095048  0.00033992 -2.7962  0.00517
+lag.METER_REPA  0.00048620  0.00060661  0.8015  0.42284
+
+Rho: 0.83136, LR test value: 2310.9, p-value: < 2.22e-16
+Asymptotic standard error: 0.013652
+    z-value: 60.896, p-value: < 2.22e-16
+Wald statistic: 3708.3, p-value: < 2.22e-16
+
+Log likelihood: 8897.956 for mixed model
+ML residual variance (sigma squared): 0.00047156, (sigma: 0.021715)
+Number of observations: 3768 
+Number of parameters estimated: 5 
+AIC: -17786, (AIC for lm: -15477)
+LM test for residual autocorrelation
+test value: 61.649, p-value: 4.1078e-15
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "TRE"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.131475 -0.010170 -0.000330  0.010278  0.187016 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  0.01499004  0.00198115  7.5663 3.841e-14
+TREES       -0.00053303  0.00026588 -2.0048   0.04499
+
+Rho: 0.89322, LR test value: 2451, p-value: < 2.22e-16
+Asymptotic standard error: 0.014119
+    z-value: 63.264, p-value: < 2.22e-16
+Wald statistic: 4002.3, p-value: < 2.22e-16
+
+Log likelihood: 8969.575 for lag model
+ML residual variance (sigma squared): 0.00047236, (sigma: 0.021734)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17931, (AIC for lm: -15482)
+LM test for residual autocorrelation
+test value: 30.418, p-value: 3.4829e-08
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13141166 -0.01018974 -0.00034261  0.01030879  0.18722091 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  0.13739459  0.00338098 40.6375   <2e-16
+TREES       -0.00031655  0.00027016 -1.1717   0.2413
+
+Lambda: 0.89506, LR test value: 2448.4, p-value: < 2.22e-16
+Asymptotic standard error: 0.013987
+    z-value: 63.99, p-value: < 2.22e-16
+Wald statistic: 4094.8, p-value: < 2.22e-16
+
+Log likelihood: 8968.269 for error model
+ML residual variance (sigma squared): 0.00047248, (sigma: 0.021737)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17929, (AIC for lm: -15482)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.014819, observed rank = 1, p-value = 0.999
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13095623 -0.01002181 -0.00016604  0.01027782  0.18672514 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  0.01750709  0.00223100  7.8472 4.219e-15
+TREES       -0.00040181  0.00027145 -1.4802  0.138814
+lag.TREES   -0.00229285  0.00085670 -2.6764  0.007442
+
+Rho: 0.8848, LR test value: 2261.5, p-value: < 2.22e-16
+Asymptotic standard error: 0.014684
+    z-value: 60.256, p-value: < 2.22e-16
+Wald statistic: 3630.7, p-value: < 2.22e-16
+
+Log likelihood: 8973.105 for mixed model
+ML residual variance (sigma squared): 0.00047238, (sigma: 0.021734)
+Number of observations: 3768 
+Number of parameters estimated: 5 
+AIC: -17936, (AIC for lm: -15677)
+LM test for residual autocorrelation
+test value: 26.83, p-value: 2.2214e-07
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "ILL"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13036356 -0.00999776 -0.00029726  0.01020668  0.18780515 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value  Pr(>|z|)
+(Intercept) 1.4590e-02 2.0129e-03  7.2482 4.223e-13
+ILLDUMP     9.6652e-05 3.2021e-05  3.0184  0.002541
+
+Rho: 0.88895, LR test value: 2374.4, p-value: < 2.22e-16
+Asymptotic standard error: 0.01441
+    z-value: 61.688, p-value: < 2.22e-16
+Wald statistic: 3805.4, p-value: < 2.22e-16
+
+Log likelihood: 8972.005 for lag model
+ML residual variance (sigma squared): 0.00047221, (sigma: 0.02173)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17936, (AIC for lm: -15564)
+LM test for residual autocorrelation
+test value: 30.236, p-value: 3.8263e-08
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13084519 -0.01006682 -0.00039179  0.01024514  0.18824869 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept) 1.3673e-01 3.3692e-03 40.5822  < 2e-16
+ILLDUMP     6.0591e-05 3.4442e-05  1.7593  0.07853
+
+Lambda: 0.89464, LR test value: 2368.6, p-value: < 2.22e-16
+Asymptotic standard error: 0.014022
+    z-value: 63.802, p-value: < 2.22e-16
+Wald statistic: 4070.6, p-value: < 2.22e-16
+
+Log likelihood: 8969.127 for error model
+ML residual variance (sigma squared): 0.00047231, (sigma: 0.021733)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17930, (AIC for lm: -15564)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.014539, observed rank = 2, p-value = 0.998
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.12974743 -0.00999685 -0.00012013  0.01017581  0.18472766 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value  Pr(>|z|)
+(Intercept) 1.5310e-02 2.0781e-03  7.3674 1.739e-13
+ILLDUMP     6.2865e-05 3.4470e-05  1.8238  0.068187
+lag.ILLDUMP 2.6398e-04 8.5289e-05  3.0952  0.001967
+
+Rho: 0.87267, LR test value: 1929.5, p-value: < 2.22e-16
+Asymptotic standard error: 0.015576
+    z-value: 56.025, p-value: < 2.22e-16
+Wald statistic: 3138.8, p-value: < 2.22e-16
+
+Log likelihood: 8976.406 for mixed model
+ML residual variance (sigma squared): 0.0004728, (sigma: 0.021744)
+Number of observations: 3768 
+Number of parameters estimated: 5 
+AIC: -17943, (AIC for lm: -16015)
+LM test for residual autocorrelation
+test value: 27.41, p-value: 1.6459e-07
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "DRA"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13457019 -0.01074920 -0.00040112  0.01037843  0.18468488 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  0.01017709  0.00195964  5.1934 2.065e-07
+DRAINAGE    -0.00080868  0.00043008 -1.8803   0.06007
+
+Rho: 0.92731, LR test value: 2408.6, p-value: < 2.22e-16
+Asymptotic standard error: 0.014002
+    z-value: 66.226, p-value: < 2.22e-16
+Wald statistic: 4385.9, p-value: < 2.22e-16
+
+Log likelihood: 8960.446 for lag model
+ML residual variance (sigma squared): 0.00048403, (sigma: 0.022001)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17913, (AIC for lm: -15506)
+LM test for residual autocorrelation
+test value: 20.966, p-value: 4.6752e-06
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13445498 -0.01073083 -0.00035714  0.01034684  0.18454730 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  0.13678878  0.00512781 26.6759   <2e-16
+DRAINAGE    -0.00037955  0.00044514 -0.8527   0.3939
+
+Lambda: 0.93008, LR test value: 2405.9, p-value: < 2.22e-16
+Asymptotic standard error: 0.013717
+    z-value: 67.808, p-value: < 2.22e-16
+Wald statistic: 4597.9, p-value: < 2.22e-16
+
+Log likelihood: 8959.067 for error model
+ML residual variance (sigma squared): 0.00048415, (sigma: 0.022003)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17910, (AIC for lm: -15506)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.010303, observed rank = 1, p-value = 0.999
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13470019 -0.01081484 -0.00022575  0.01025971  0.18630839 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)   0.01155649  0.00213106  5.4229 5.865e-08
+DRAINAGE     -0.00056630  0.00045093 -1.2558   0.20917
+lag.DRAINAGE -0.00186114  0.00095312 -1.9527   0.05086
+
+Rho: 0.92082, LR test value: 2212.1, p-value: < 2.22e-16
+Asymptotic standard error: 0.014684
+    z-value: 62.71, p-value: < 2.22e-16
+Wald statistic: 3932.6, p-value: < 2.22e-16
+
+Log likelihood: 8962.315 for mixed model
+ML residual variance (sigma squared): 0.00048408, (sigma: 0.022002)
+Number of observations: 3768 
+Number of parameters estimated: 5 
+AIC: -17915, (AIC for lm: -15705)
+LM test for residual autocorrelation
+test value: 18.308, p-value: 1.879e-05
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "SEW"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13440249 -0.01070902 -0.00037885  0.01026703  0.18502009 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value  Pr(>|z|)
+(Intercept) 0.00946105 0.00190528  4.9657 6.845e-07
+SEWERS      0.00012861 0.00056388  0.2281    0.8196
+
+Rho: 0.93055, LR test value: 2446, p-value: < 2.22e-16
+Asymptotic standard error: 0.013658
+    z-value: 68.135, p-value: < 2.22e-16
+Wald statistic: 4642.4, p-value: < 2.22e-16
+
+Log likelihood: 8958.73 for lag model
+ML residual variance (sigma squared): 0.0004842, (sigma: 0.022004)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17909, (AIC for lm: -15465)
+LM test for residual autocorrelation
+test value: 19.529, p-value: 9.9109e-06
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13435985 -0.01071813 -0.00033965  0.01026474  0.18512367 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept) 0.13653505 0.00516502 26.4346   <2e-16
+SEWERS      0.00059882 0.00057024  1.0501   0.2937
+
+Lambda: 0.93058, LR test value: 2447, p-value: < 2.22e-16
+Asymptotic standard error: 0.013655
+    z-value: 68.151, p-value: < 2.22e-16
+Wald statistic: 4644.6, p-value: < 2.22e-16
+
+Log likelihood: 8959.255 for error model
+ML residual variance (sigma squared): 0.00048406, (sigma: 0.022001)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17911, (AIC for lm: -15465)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.01018, observed rank = 1, p-value = 0.999
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13481286 -0.01071758 -0.00020416  0.01019261  0.18465773 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  0.01285000  0.00227352  5.6520 1.586e-08
+SEWERS       0.00041917  0.00057296  0.7316 0.4644226
+lag.SEWERS  -0.00673602  0.00203520 -3.3098 0.0009337
+
+Rho: 0.91751, LR test value: 2145.6, p-value: < 2.22e-16
+Asymptotic standard error: 0.015025
+    z-value: 61.066, p-value: < 2.22e-16
+Wald statistic: 3729, p-value: < 2.22e-16
+
+Log likelihood: 8963.992 for mixed model
+ML residual variance (sigma squared): 0.00048391, (sigma: 0.021998)
+Number of observations: 3768 
+Number of parameters estimated: 5 
+AIC: -17918, (AIC for lm: -15774)
+LM test for residual autocorrelation
+test value: 18.048, p-value: 2.1544e-05
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "FIR"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13430211 -0.01066860 -0.00038237  0.01030136  0.18505423 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value  Pr(>|z|)
+(Intercept) 0.00957750 0.00192430  4.9771 6.453e-07
+FIRE        0.00086178 0.00085232  1.0111     0.312
+
+Rho: 0.92927, LR test value: 2443.8, p-value: < 2.22e-16
+Asymptotic standard error: 0.013815
+    z-value: 67.264, p-value: < 2.22e-16
+Wald statistic: 4524.4, p-value: < 2.22e-16
+
+Log likelihood: 8959.212 for lag model
+ML residual variance (sigma squared): 0.00048418, (sigma: 0.022004)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17910, (AIC for lm: -15469)
+LM test for residual autocorrelation
+test value: 20.422, p-value: 6.2111e-06
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13436120 -0.01066227 -0.00034844  0.01026104  0.18501304 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept) 0.13666248 0.00513477 26.6151   <2e-16
+FIRE        0.00038496 0.00084923  0.4533   0.6503
+
+Lambda: 0.93017, LR test value: 2443, p-value: < 2.22e-16
+Asymptotic standard error: 0.013705
+    z-value: 67.87, p-value: < 2.22e-16
+Wald statistic: 4606.3, p-value: < 2.22e-16
+
+Log likelihood: 8958.806 for error model
+ML residual variance (sigma squared): 0.00048421, (sigma: 0.022005)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17910, (AIC for lm: -15469)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.010282, observed rank = 2, p-value = 0.998
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13455203 -0.01051071 -0.00036606  0.01033300  0.18505105 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value  Pr(>|z|)
+(Intercept) 0.01005735 0.00205433  4.8957 9.797e-07
+FIRE        0.00070924 0.00085609  0.8285  0.407407
+lag.FIRE    0.01046631 0.00378794  2.7631  0.005726
+
+Rho: 0.91777, LR test value: 2118.9, p-value: < 2.22e-16
+Asymptotic standard error: 0.01502
+    z-value: 61.101, p-value: < 2.22e-16
+Wald statistic: 3733.4, p-value: < 2.22e-16
+
+Log likelihood: 8962.744 for mixed model
+ML residual variance (sigma squared): 0.00048421, (sigma: 0.022005)
+Number of observations: 3768 
+Number of parameters estimated: 5 
+AIC: -17915, (AIC for lm: -15799)
+LM test for residual autocorrelation
+test value: 18.255, p-value: 1.9319e-05
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "ELE"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13265132 -0.01081075 -0.00040483  0.01058216  0.18225142 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+              Estimate Std. Error z value Pr(>|z|)
+(Intercept) 4.4633e-03 1.5033e-03   2.969 0.002987
+ELECTRICAL  4.1626e-05 3.2280e-04   0.129 0.897394
+
+Rho: 0.96564, LR test value: 2409.1, p-value: < 2.22e-16
+Asymptotic standard error: 0.011138
+    z-value: 86.698, p-value: < 2.22e-16
+Wald statistic: 7516.5, p-value: < 2.22e-16
+
+Log likelihood: 8939.043 for lag model
+ML residual variance (sigma squared): 0.00049545, (sigma: 0.022259)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17870, (AIC for lm: -15463)
+LM test for residual autocorrelation
+test value: 0.0025548, p-value: 0.95969
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13283373 -0.01081070 -0.00037026  0.01062633  0.18252297 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) 0.1303024  0.0105644 12.3341   <2e-16
+ELECTRICAL  0.0002589  0.0003338  0.7756    0.438
+
+Lambda: 0.96568, LR test value: 2409.7, p-value: < 2.22e-16
+Asymptotic standard error: 0.011132
+    z-value: 86.751, p-value: < 2.22e-16
+Wald statistic: 7525.8, p-value: < 2.22e-16
+
+Log likelihood: 8939.335 for error model
+ML residual variance (sigma squared): 0.00049537, (sigma: 0.022257)
+Number of observations: 3768 
+Number of parameters estimated: 4 
+AIC: -17871, (AIC for lm: -15463)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = 0.00015094, observed rank = 599, p-value = 0.401
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13332637 -0.01098055 -0.00041835  0.01048035  0.18457941 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                  Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)     0.00703051  0.00191390  3.6734 0.0002394
+ELECTRICAL      0.00025429  0.00033374  0.7619 0.4460955
+lag.ELECTRICAL -0.00337900  0.00128111 -2.6376 0.0083507
+
+Rho: 0.95699, LR test value: 2133.9, p-value: < 2.22e-16
+Asymptotic standard error: 0.012564
+    z-value: 76.171, p-value: < 2.22e-16
+Wald statistic: 5801.9, p-value: < 2.22e-16
+
+Log likelihood: 8942.449 for mixed model
+ML residual variance (sigma squared): 0.00049516, (sigma: 0.022252)
+Number of observations: 3768 
+Number of parameters estimated: 5 
+AIC: -17875, (AIC for lm: -15743)
+LM test for residual autocorrelation
+test value: 0.059033, p-value: 0.80803
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "A"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13077757 -0.01006017 -0.00036098  0.01018785  0.18704836 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  1.6301e-02  2.1005e-03  7.7606 8.438e-15
+DRAINAGE    -1.2088e-03  4.5103e-04 -2.6802 0.0073586
+ELECTRICAL   1.5088e-04  3.3427e-04  0.4514 0.6517207
+ILLDUMP      1.1921e-04  3.2587e-05  3.6583 0.0002539
+METER_REPA  -5.8448e-04  2.8329e-04 -2.0632 0.0390942
+SEWERS       3.2764e-04  5.8453e-04  0.5605 0.5751272
+STREETSW    -1.8532e-05  1.2382e-04 -0.1497 0.8810263
+TREES       -4.9141e-04  2.7999e-04 -1.7551 0.0792408
+
+Rho: 0.88036, LR test value: 2235.8, p-value: < 2.22e-16
+Asymptotic standard error: 0.014848
+    z-value: 59.291, p-value: < 2.22e-16
+Wald statistic: 3515.4, p-value: < 2.22e-16
+
+Log likelihood: 8981.111 for lag model
+ML residual variance (sigma squared): 0.00047084, (sigma: 0.021699)
+Number of observations: 3768 
+Number of parameters estimated: 10 
+AIC: -17942, (AIC for lm: -15708)
+LM test for residual autocorrelation
+test value: 29.898, p-value: 4.5546e-08
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+       Min         1Q     Median         3Q        Max 
+-0.1312835 -0.0100990 -0.0004266  0.0102490  0.1861667 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  1.3691e-01  3.3571e-03 40.7835  < 2e-16
+DRAINAGE    -9.2434e-04  4.6483e-04 -1.9885  0.04675
+ELECTRICAL   3.6384e-04  3.4806e-04  1.0454  0.29586
+ILLDUMP      7.0983e-05  3.5611e-05  1.9933  0.04623
+METER_REPA  -6.4999e-04  3.2428e-04 -2.0044  0.04503
+SEWERS       6.0498e-04  5.8483e-04  1.0345  0.30092
+STREETSW     3.4045e-05  1.2741e-04  0.2672  0.78931
+TREES       -3.5752e-04  2.8531e-04 -1.2531  0.21017
+
+Lambda: 0.89409, LR test value: 2223.2, p-value: < 2.22e-16
+Asymptotic standard error: 0.014068
+    z-value: 63.556, p-value: < 2.22e-16
+Wald statistic: 4039.3, p-value: < 2.22e-16
+
+Log likelihood: 8974.819 for error model
+ML residual variance (sigma squared): 0.00047095, (sigma: 0.021701)
+Number of observations: 3768 
+Number of parameters estimated: 10 
+AIC: -17930, (AIC for lm: -15708)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.01419, observed rank = 2, p-value = 0.998
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-1.3028e-01 -1.0154e-02 -7.6618e-05  1.0248e-02  1.8571e-01 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                  Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)     2.1359e-02  2.6241e-03  8.1397 4.441e-16
+DRAINAGE       -1.0594e-03  4.7032e-04 -2.2524  0.024295
+ELECTRICAL      3.6648e-04  3.4845e-04  1.0518  0.292913
+ILLDUMP         7.0178e-05  3.5657e-05  1.9681  0.049053
+METER_REPA     -6.4077e-04  3.2536e-04 -1.9695  0.048901
+SEWERS          5.8017e-04  5.9129e-04  0.9812  0.326503
+STREETSW        2.7954e-05  1.2792e-04  0.2185  0.827021
+TREES          -3.8290e-04  2.8691e-04 -1.3346  0.182021
+lag.DRAINAGE   -7.8232e-04  1.0952e-03 -0.7143  0.475046
+lag.ELECTRICAL -1.9141e-03  1.1086e-03 -1.7267  0.084230
+lag.ILLDUMP     2.7079e-04  9.0013e-05  3.0083  0.002627
+lag.METER_REPA  3.1369e-04  7.5078e-04  0.4178  0.676079
+lag.SEWERS     -2.8543e-03  2.1430e-03 -1.3319  0.182881
+lag.STREETSW   -1.0177e-04  3.9890e-04 -0.2551  0.798626
+lag.TREES      -9.3367e-04  9.4352e-04 -0.9896  0.322386
+
+Rho: 0.84807, LR test value: 1562.3, p-value: < 2.22e-16
+Asymptotic standard error: 0.017214
+    z-value: 49.266, p-value: < 2.22e-16
+Wald statistic: 2427.2, p-value: < 2.22e-16
+
+Log likelihood: 8992.1 for mixed model
+ML residual variance (sigma squared): 0.00047117, (sigma: 0.021706)
+Number of observations: 3768 
+Number of parameters estimated: 17 
+AIC: -17950, (AIC for lm: -16390)
+LM test for residual autocorrelation
+test value: 20.43, p-value: 6.1838e-06
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "B"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13065509 -0.01006061 -0.00035556  0.01014707  0.18701010 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  1.6374e-02  2.1013e-03  7.7925 6.661e-15
+DRAINAGE    -1.1947e-03  4.4982e-04 -2.6560 0.0079063
+ILLDUMP      1.2014e-04  3.2545e-05  3.6916 0.0002228
+METER_REPA  -5.5683e-04  2.7649e-04 -2.0139 0.0440192
+SEWERS       3.4713e-04  5.8286e-04  0.5956 0.5514646
+STREETSW    -1.0611e-05  1.2252e-04 -0.0866 0.9309883
+TREES       -4.8641e-04  2.7975e-04 -1.7388 0.0820783
+
+Rho: 0.88004, LR test value: 2240.3, p-value: < 2.22e-16
+Asymptotic standard error: 0.014865
+    z-value: 59.204, p-value: < 2.22e-16
+Wald statistic: 3505.2, p-value: < 2.22e-16
+
+Log likelihood: 8981.009 for lag model
+ML residual variance (sigma squared): 0.0004709, (sigma: 0.0217)
+Number of observations: 3768 
+Number of parameters estimated: 9 
+AIC: -17944, (AIC for lm: -15706)
+LM test for residual autocorrelation
+test value: 30.088, p-value: 4.1278e-08
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13101679 -0.01019999 -0.00040109  0.01016754  0.18592433 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  1.3701e-01  3.3458e-03 40.9500  < 2e-16
+DRAINAGE    -8.8593e-04  4.6345e-04 -1.9116  0.05593
+ILLDUMP      7.4099e-05  3.5497e-05  2.0875  0.03685
+METER_REPA  -5.9025e-04  3.1925e-04 -1.8489  0.06448
+SEWERS       6.4410e-04  5.8372e-04  1.1034  0.26984
+STREETSW     5.2619e-05  1.2618e-04  0.4170  0.67667
+TREES       -3.4223e-04  2.8498e-04 -1.2009  0.22979
+
+Lambda: 0.89374, LR test value: 2226.8, p-value: < 2.22e-16
+Asymptotic standard error: 0.014096
+    z-value: 63.402, p-value: < 2.22e-16
+Wald statistic: 4019.8, p-value: < 2.22e-16
+
+Log likelihood: 8974.273 for error model
+ML residual variance (sigma squared): 0.00047112, (sigma: 0.021705)
+Number of observations: 3768 
+Number of parameters estimated: 9 
+AIC: -17931, (AIC for lm: -15706)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.01427, observed rank = 2, p-value = 0.998
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-1.3020e-01 -1.0045e-02 -2.4056e-05  1.0189e-02  1.8488e-01 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                  Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)     2.0867e-02  2.5856e-03  8.0707 6.661e-16
+DRAINAGE       -1.0073e-03  4.6901e-04 -2.1478  0.031729
+ILLDUMP         7.4566e-05  3.5539e-05  2.0981  0.035892
+METER_REPA     -5.7346e-04  3.2037e-04 -1.7900  0.073460
+SEWERS          5.9717e-04  5.9007e-04  1.0120  0.311519
+STREETSW        4.7381e-05  1.2672e-04  0.3739  0.708466
+TREES          -3.5926e-04  2.8660e-04 -1.2535  0.210009
+lag.DRAINAGE   -8.1686e-04  1.0954e-03 -0.7457  0.455840
+lag.ILLDUMP     2.6815e-04  8.9804e-05  2.9859  0.002827
+lag.METER_REPA -2.0195e-04  6.7960e-04 -0.2972  0.766342
+lag.SEWERS     -3.4784e-03  2.1061e-03 -1.6516  0.098618
+lag.STREETSW   -2.1277e-04  3.9344e-04 -0.5408  0.588660
+lag.TREES      -9.2914e-04  9.4272e-04 -0.9856  0.324332
+
+Rho: 0.84939, LR test value: 1573.9, p-value: < 2.22e-16
+Asymptotic standard error: 0.017152
+    z-value: 49.522, p-value: < 2.22e-16
+Wald statistic: 2452.4, p-value: < 2.22e-16
+
+Log likelihood: 8990.408 for mixed model
+ML residual variance (sigma squared): 0.00047148, (sigma: 0.021714)
+Number of observations: 3768 
+Number of parameters estimated: 15 
+AIC: -17951, (AIC for lm: -16379)
+LM test for residual autocorrelation
+test value: 22.312, p-value: 2.3176e-06
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "C"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13083343 -0.01003679 -0.00031045  0.01025330  0.18700020 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  1.6390e-02  2.1025e-03  7.7951 6.439e-15
+DRAINAGE    -1.1791e-03  4.4771e-04 -2.6337 0.0084464
+ELECTRICAL   1.6473e-04  3.3332e-04  0.4942 0.6211650
+ILLDUMP      1.1916e-04  3.2589e-05  3.6565 0.0002557
+METER_REPA  -5.8273e-04  2.8328e-04 -2.0571 0.0396769
+STREETSW    -5.9444e-06  1.2171e-04 -0.0488 0.9610467
+TREES       -4.7940e-04  2.7912e-04 -1.7176 0.0858781
+
+Rho: 0.88001, LR test value: 2238.8, p-value: < 2.22e-16
+Asymptotic standard error: 0.014872
+    z-value: 59.171, p-value: < 2.22e-16
+Wald statistic: 3501.2, p-value: < 2.22e-16
+
+Log likelihood: 8980.954 for lag model
+ML residual variance (sigma squared): 0.00047092, (sigma: 0.021701)
+Number of observations: 3768 
+Number of parameters estimated: 9 
+AIC: -17944, (AIC for lm: -15707)
+LM test for residual autocorrelation
+test value: 30.142, p-value: 4.0151e-08
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13137052 -0.01009821 -0.00046666  0.01023459  0.18617630 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  1.3701e-01  3.3475e-03 40.9281  < 2e-16
+DRAINAGE    -8.8031e-04  4.6295e-04 -1.9015  0.05723
+ELECTRICAL   3.8688e-04  3.4739e-04  1.1137  0.26542
+ILLDUMP      7.1830e-05  3.5609e-05  2.0172  0.04368
+METER_REPA  -6.3707e-04  3.2409e-04 -1.9657  0.04933
+STREETSW     5.4822e-05  1.2583e-04  0.4357  0.66307
+TREES       -3.3420e-04  2.8446e-04 -1.1749  0.24004
+
+Lambda: 0.8938, LR test value: 2225.5, p-value: < 2.22e-16
+Asymptotic standard error: 0.014092
+    z-value: 63.427, p-value: < 2.22e-16
+Wald statistic: 4023, p-value: < 2.22e-16
+
+Log likelihood: 8974.285 for error model
+ML residual variance (sigma squared): 0.00047111, (sigma: 0.021705)
+Number of observations: 3768 
+Number of parameters estimated: 9 
+AIC: -17931, (AIC for lm: -15707)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.01421, observed rank = 5, p-value = 0.995
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13031431 -0.01010293 -0.00012274  0.01027318  0.18580416 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                  Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)     2.1007e-02  2.5917e-03  8.1055 4.441e-16
+DRAINAGE       -1.0320e-03  4.6760e-04 -2.2070  0.027315
+ELECTRICAL      3.8918e-04  3.4781e-04  1.1190  0.263155
+ILLDUMP         7.1416e-05  3.5655e-05  2.0030  0.045180
+METER_REPA     -6.2338e-04  3.2516e-04 -1.9171  0.055220
+STREETSW        4.3505e-05  1.2618e-04  0.3448  0.730245
+TREES          -3.5587e-04  2.8614e-04 -1.2437  0.213610
+lag.DRAINAGE   -8.8317e-04  1.0892e-03 -0.8109  0.417445
+lag.ELECTRICAL -2.1564e-03  1.0901e-03 -1.9781  0.047918
+lag.ILLDUMP     2.7706e-04  8.9533e-05  3.0945  0.001971
+lag.METER_REPA  3.4304e-04  7.4859e-04  0.4582  0.646774
+lag.STREETSW   -2.5300e-04  3.8097e-04 -0.6641  0.506633
+lag.TREES      -1.1005e-03  9.3686e-04 -1.1747  0.240118
+
+Rho: 0.84914, LR test value: 1573.5, p-value: < 2.22e-16
+Asymptotic standard error: 0.017137
+    z-value: 49.55, p-value: < 2.22e-16
+Wald statistic: 2455.2, p-value: < 2.22e-16
+
+Log likelihood: 8990.863 for mixed model
+ML residual variance (sigma squared): 0.00047139, (sigma: 0.021711)
+Number of observations: 3768 
+Number of parameters estimated: 15 
+AIC: -17952, (AIC for lm: -16380)
+LM test for residual autocorrelation
+test value: 20.65, p-value: 5.5149e-06
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "D"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13070261 -0.01004528 -0.00031026  0.01025051  0.18695503 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  1.6476e-02  2.1035e-03  7.8328 4.663e-15
+DRAINAGE    -1.1617e-03  4.4616e-04 -2.6038 0.0092185
+ILLDUMP      1.2019e-04  3.2550e-05  3.6923 0.0002223
+METER_REPA  -5.5226e-04  2.7638e-04 -1.9982 0.0456972
+STREETSW     3.5736e-06  1.2011e-04  0.0298 0.9762636
+TREES       -4.7313e-04  2.7880e-04 -1.6970 0.0896911
+
+Rho: 0.87963, LR test value: 2243.9, p-value: < 2.22e-16
+Asymptotic standard error: 0.014891
+    z-value: 59.07, p-value: < 2.22e-16
+Wald statistic: 3489.3, p-value: < 2.22e-16
+
+Log likelihood: 8980.833 for lag model
+ML residual variance (sigma squared): 0.00047099, (sigma: 0.021702)
+Number of observations: 3768 
+Number of parameters estimated: 8 
+AIC: -17946, (AIC for lm: -15704)
+LM test for residual autocorrelation
+test value: 30.359, p-value: 3.5905e-08
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13109177 -0.01021577 -0.00047785  0.01024087  0.18591815 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  1.3712e-01  3.3349e-03 41.1166  < 2e-16
+DRAINAGE    -8.3626e-04  4.6134e-04 -1.8127  0.06988
+ILLDUMP      7.5214e-05  3.5491e-05  2.1192  0.03407
+METER_REPA  -5.7241e-04  3.1890e-04 -1.7949  0.07266
+STREETSW     7.6089e-05  1.2439e-04  0.6117  0.54073
+TREES       -3.1626e-04  2.8405e-04 -1.1134  0.26553
+
+Lambda: 0.8934, LR test value: 2229.5, p-value: < 2.22e-16
+Asymptotic standard error: 0.014124
+    z-value: 63.254, p-value: < 2.22e-16
+Wald statistic: 4001.1, p-value: < 2.22e-16
+
+Log likelihood: 8973.665 for error model
+ML residual variance (sigma squared): 0.00047131, (sigma: 0.02171)
+Number of observations: 3768 
+Number of parameters estimated: 8 
+AIC: -17931, (AIC for lm: -15704)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.014299, observed rank = 1, p-value = 0.999
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-1.3024e-01 -1.0061e-02 -9.9914e-05  1.0230e-02  1.8489e-01 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                  Estimate  Std. Error z value Pr(>|z|)
+(Intercept)     2.0302e-02  2.5357e-03  8.0065 1.11e-15
+DRAINAGE       -9.7933e-04  4.6611e-04 -2.1011 0.035634
+ILLDUMP         7.6408e-05  3.5532e-05  2.1504 0.031524
+METER_REPA     -5.4914e-04  3.2002e-04 -1.7160 0.086169
+STREETSW        6.3446e-05  1.2475e-04  0.5086 0.611059
+TREES          -3.2743e-04  2.8576e-04 -1.1458 0.251865
+lag.DRAINAGE   -9.5340e-04  1.0892e-03 -0.8753 0.381408
+lag.ILLDUMP     2.7705e-04  8.9236e-05  3.1047 0.001904
+lag.METER_REPA -2.4470e-04  6.7922e-04 -0.3603 0.718645
+lag.STREETSW   -4.2299e-04  3.7018e-04 -1.1427 0.253174
+lag.TREES      -1.1327e-03  9.3671e-04 -1.2092 0.226568
+
+Rho: 0.85106, LR test value: 1590.9, p-value: < 2.22e-16
+Asymptotic standard error: 0.017039
+    z-value: 49.948, p-value: < 2.22e-16
+Wald statistic: 2494.8, p-value: < 2.22e-16
+
+Log likelihood: 8988.707 for mixed model
+ML residual variance (sigma squared): 0.00047175, (sigma: 0.02172)
+Number of observations: 3768 
+Number of parameters estimated: 13 
+AIC: -17951, (AIC for lm: -16362)
+LM test for residual autocorrelation
+test value: 22.923, p-value: 1.686e-06
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "E"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13077999 -0.01003297 -0.00036813  0.01019966  0.18706386 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  1.6273e-02  2.0968e-03  7.7608 8.438e-15
+DRAINAGE    -1.2156e-03  4.4851e-04 -2.7103 0.0067224
+ELECTRICAL   1.4379e-04  3.3073e-04  0.4348 0.6637339
+ILLDUMP      1.1876e-04  3.2477e-05  3.6567 0.0002555
+METER_REPA  -5.8357e-04  2.8324e-04 -2.0604 0.0393638
+SEWERS       3.1178e-04  5.7450e-04  0.5427 0.5873341
+TREES       -4.9740e-04  2.7694e-04 -1.7961 0.0724795
+
+Rho: 0.88048, LR test value: 2243.8, p-value: < 2.22e-16
+Asymptotic standard error: 0.01484
+    z-value: 59.33, p-value: < 2.22e-16
+Wald statistic: 3520.1, p-value: < 2.22e-16
+
+Log likelihood: 8981.1 for lag model
+ML residual variance (sigma squared): 0.00047083, (sigma: 0.021699)
+Number of observations: 3768 
+Number of parameters estimated: 9 
+AIC: -17944, (AIC for lm: -15702)
+LM test for residual autocorrelation
+test value: 29.886, p-value: 4.5824e-08
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13125546 -0.01010939 -0.00043345  0.01022106  0.18619610 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  1.3694e-01  3.3533e-03 40.8390  < 2e-16
+DRAINAGE    -9.1169e-04  4.6240e-04 -1.9716  0.04865
+ELECTRICAL   3.7682e-04  3.4463e-04  1.0934  0.27422
+ILLDUMP      7.1982e-05  3.5419e-05  2.0323  0.04212
+METER_REPA  -6.4857e-04  3.2424e-04 -2.0003  0.04547
+SEWERS       6.2962e-04  5.7748e-04  1.0903  0.27559
+TREES       -3.4720e-04  2.8266e-04 -1.2283  0.21933
+
+Lambda: 0.89402, LR test value: 2231.2, p-value: < 2.22e-16
+Asymptotic standard error: 0.014073
+    z-value: 63.525, p-value: < 2.22e-16
+Wald statistic: 4035.5, p-value: < 2.22e-16
+
+Log likelihood: 8974.784 for error model
+ML residual variance (sigma squared): 0.00047096, (sigma: 0.021702)
+Number of observations: 3768 
+Number of parameters estimated: 9 
+AIC: -17932, (AIC for lm: -15702)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.014184, observed rank = 3, p-value = 0.997
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-1.3020e-01 -1.0141e-02 -9.6602e-05  1.0178e-02  1.8583e-01 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                  Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)     2.1317e-02  2.6131e-03  8.1577 4.441e-16
+DRAINAGE       -1.0489e-03  4.6818e-04 -2.2403  0.025069
+ELECTRICAL      3.7705e-04  3.4506e-04  1.0927  0.274525
+ILLDUMP         7.0978e-05  3.5461e-05  2.0016  0.045333
+METER_REPA     -6.3938e-04  3.2531e-04 -1.9655  0.049357
+SEWERS          5.9899e-04  5.8331e-04  1.0269  0.304481
+TREES          -3.7512e-04  2.8422e-04 -1.3198  0.186898
+lag.DRAINAGE   -8.5720e-04  1.0512e-03 -0.8155  0.414803
+lag.ELECTRICAL -1.9615e-03  1.0931e-03 -1.7944  0.072753
+lag.ILLDUMP     2.6878e-04  8.9808e-05  2.9929  0.002764
+lag.METER_REPA  3.4090e-04  7.3778e-04  0.4621  0.644031
+lag.SEWERS     -2.9869e-03  2.0397e-03 -1.4644  0.143096
+lag.TREES      -9.7357e-04  9.3012e-04 -1.0467  0.295231
+
+Rho: 0.84821, LR test value: 1569.5, p-value: < 2.22e-16
+Asymptotic standard error: 0.017199
+    z-value: 49.319, p-value: < 2.22e-16
+Wald statistic: 2432.3, p-value: < 2.22e-16
+
+Log likelihood: 8992.053 for mixed model
+ML residual variance (sigma squared): 0.00047117, (sigma: 0.021706)
+Number of observations: 3768 
+Number of parameters estimated: 15 
+AIC: -17954, (AIC for lm: -16387)
+LM test for residual autocorrelation
+test value: 20.406, p-value: 6.2624e-06
+
+[1] "finish SDM model fitting"
+[1] "*****************************************"
+[1] "F"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13062308 -0.01002292 -0.00028855  0.01023843  0.18711872 
+
+Type: lag 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value  Pr(>|z|)
+(Intercept)  1.6122e-02  2.0923e-03  7.7050  1.31e-14
+DRAINAGE    -1.2734e-03  4.4761e-04 -2.8449 0.0044420
+ELECTRICAL  -3.7375e-06  3.2289e-04 -0.0116 0.9907647
+ILLDUMP      1.1818e-04  3.2498e-05  3.6364 0.0002765
+SEWERS       3.0297e-04  5.7478e-04  0.5271 0.5981221
+TREES       -5.0319e-04  2.7706e-04 -1.8162 0.0693449
+
+Rho: 0.88133, LR test value: 2249.2, p-value: < 2.22e-16
+Asymptotic standard error: 0.014825
+    z-value: 59.449, p-value: < 2.22e-16
+Wald statistic: 3534.2, p-value: < 2.22e-16
+
+Log likelihood: 8978.977 for lag model
+ML residual variance (sigma squared): 0.00047128, (sigma: 0.021709)
+Number of observations: 3768 
+Number of parameters estimated: 8 
+AIC: -17942, (AIC for lm: -15695)
+LM test for residual autocorrelation
+test value: 31.037, p-value: 2.5315e-08
+
+[1] "finish SLM model fitting"
+
+Call:errorsarlm(formula = X, data = cbshape_sf_no_na, listw = listw,     zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-0.13117211 -0.01008624 -0.00040036  0.01029435  0.18754088 
+
+Type: error 
+Coefficients: (asymptotic standard errors) 
+               Estimate  Std. Error z value Pr(>|z|)
+(Intercept)  1.3692e-01  3.3536e-03 40.8259  < 2e-16
+DRAINAGE    -9.2753e-04  4.6259e-04 -2.0051  0.04495
+ELECTRICAL   2.5241e-04  3.3916e-04  0.7442  0.45674
+ILLDUMP      7.3545e-05  3.5430e-05  2.0758  0.03791
+SEWERS       5.8148e-04  5.7729e-04  1.0073  0.31381
+TREES       -3.5943e-04  2.8275e-04 -1.2712  0.20366
+
+Lambda: 0.89397, LR test value: 2236.8, p-value: < 2.22e-16
+Asymptotic standard error: 0.014077
+    z-value: 63.506, p-value: < 2.22e-16
+Wald statistic: 4033, p-value: < 2.22e-16
+
+Log likelihood: 8972.784 for error model
+ML residual variance (sigma squared): 0.00047147, (sigma: 0.021713)
+Number of observations: 3768 
+Number of parameters estimated: 8 
+AIC: -17930, (AIC for lm: -15695)
+
+
+	Monte-Carlo simulation of Moran I
+
+data:  residuals(error_model) 
+weights: listws[[i]]  
+number of simulations + 1: 1000 
+
+statistic = -0.014327, observed rank = 3, p-value = 0.997
+alternative hypothesis: greater
+
+[1] "finish SEM model fitting"
+
+Call:lagsarlm(formula = X, data = cbshape_sf_no_na, listw = listw, 
+    type = "Durbin", zero.policy = TRUE)
+
+Residuals:
+        Min          1Q      Median          3Q         Max 
+-1.3010e-01 -1.0090e-02  1.1278e-06  1.0194e-02  1.8700e-01 
+
+Type: mixed 
+Coefficients: (asymptotic standard errors) 
+                  Estimate  Std. Error z value Pr(>|z|)
+(Intercept)     2.1361e-02  2.6090e-03  8.1872 2.22e-16
+DRAINAGE       -1.0757e-03  4.6780e-04 -2.2995 0.021477
+ELECTRICAL      2.4990e-04  3.3944e-04  0.7362 0.461597
+ILLDUMP         7.2370e-05  3.5469e-05  2.0404 0.041315
+SEWERS          5.6244e-04  5.8265e-04  0.9653 0.334384
+TREES          -3.8836e-04  2.8429e-04 -1.3661 0.171919
+lag.DRAINAGE   -9.4710e-04  1.0323e-03 -0.9175 0.358881
+lag.ELECTRICAL -2.0492e-03  9.8948e-04 -2.0710 0.038358
+lag.ILLDUMP     2.5959e-04  8.9036e-05  2.9155 0.003551
+lag.SEWERS     -2.7627e-03  2.0176e-03 -1.3693 0.170900
+lag.TREES      -9.9324e-04  9.2916e-04 -1.0690 0.285081
+
+Rho: 0.84856, LR test value: 1583.2, p-value: < 2.22e-16
+Asymptotic standard error: 0.017167
+    z-value: 49.429, p-value: < 2.22e-16
+Wald statistic: 2443.2, p-value: < 2.22e-16
+
+Log likelihood: 8990.007 for mixed model
+ML residual variance (sigma squared): 0.00047165, (sigma: 0.021718)
+Number of observations: 3768 
+Number of parameters estimated: 13 
+AIC: -17954, (AIC for lm: -16373)
+LM test for residual autocorrelation
+test value: 20.686, p-value: 5.4113e-06
+
+[1] "finish SDM model fitting"
