@@ -18,6 +18,12 @@ The repository implements a complete spatial analytics pipeline that integrates 
 
 ---
 
+# Figures
+
+<img width="1376" height="876" alt="Screenshot 2026-06-29 at 5 31 49 PM" src="https://github.com/user-attachments/assets/d7afd333-c509-41ad-8ccf-b646f12a1f0d" />
+<img width="1870" height="724" alt="Screenshot 2026-06-29 at 5 32 21 PM" src="https://github.com/user-attachments/assets/36e89f79-ee54-4f0a-ba05-2d6cc9eb546a" />
+<img width="1863" height="892" alt="Screenshot 2026-06-29 at 5 30 20 PM" src="https://github.com/user-attachments/assets/0e1060da-0dfc-488a-af8a-997ca6fb8736" />
+
 # Pipeline Overview
 
 ```text
