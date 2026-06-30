@@ -1,0 +1,219 @@
+Reading layer `data_2017_ready_for_spatialModel' from data source 
+  `C:\Users\jduan\Desktop\CUSC\Data\311_Oakland\data_2017_ready_for_spatialModel.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 6319 features and 52 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 6028230 ymin: 2080208 xmax: 6095715 ymax: 2149507
+Projected CRS: NAD83(2011) / California zone 3 (ftUS)
+[1] "***************AIC***************"
+Start:  AIC=-24677.2
+MH_prevale ~ DRAINAGE + ELECTRICAL + FIRE + ILLDUMP + KOCB + 
+    METER_REPA + PARKING + RECYCLING + ROW_INSPEC + SEWERS + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- FIRE        1  0.000071 4.6916 -24679
+- RECYCLING   1  0.000418 4.6920 -24679
+<none>                    4.6916 -24677
+- ROW_INSPEC  1  0.003424 4.6950 -24677
+- SEWERS      1  0.004378 4.6959 -24676
+- KOCB        1  0.004968 4.6965 -24675
+- ELECTRICAL  1  0.011305 4.7029 -24670
+- DRAINAGE    1  0.013614 4.7052 -24669
+- METER_REPA  1  0.015189 4.7068 -24667
+- PARKING     1  0.022860 4.7144 -24661
+- TREES       1  0.064477 4.7560 -24629
+- STREETSW    1  0.068641 4.7602 -24625
+- ILLDUMP     1  0.204124 4.8957 -24522
+
+Step:  AIC=-24679.15
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + KOCB + METER_REPA + 
+    PARKING + RECYCLING + ROW_INSPEC + SEWERS + STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- RECYCLING   1  0.000419 4.6921 -24681
+<none>                    4.6916 -24679
+- ROW_INSPEC  1  0.003435 4.6951 -24678
+- SEWERS      1  0.004370 4.6960 -24678
+- KOCB        1  0.005005 4.6966 -24677
+- ELECTRICAL  1  0.011378 4.7030 -24672
+- DRAINAGE    1  0.013611 4.7052 -24670
+- METER_REPA  1  0.015149 4.7068 -24669
+- PARKING     1  0.022909 4.7145 -24663
+- TREES       1  0.064504 4.7561 -24631
+- STREETSW    1  0.068595 4.7602 -24627
+- ILLDUMP     1  0.281248 4.9729 -24466
+
+Step:  AIC=-24680.81
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + KOCB + METER_REPA + 
+    PARKING + ROW_INSPEC + SEWERS + STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+<none>                    4.6921 -24681
+- ROW_INSPEC  1  0.003519 4.6956 -24680
+- SEWERS      1  0.004462 4.6965 -24679
+- KOCB        1  0.004994 4.6971 -24679
+- ELECTRICAL  1  0.011582 4.7036 -24674
+- DRAINAGE    1  0.013778 4.7058 -24672
+- METER_REPA  1  0.015344 4.7074 -24671
+- PARKING     1  0.022643 4.7147 -24665
+- TREES       1  0.065466 4.7575 -24632
+- STREETSW    1  0.069250 4.7613 -24629
+- ILLDUMP     1  0.285831 4.9779 -24464
+
+Call:
+lm(formula = MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + KOCB + 
+    METER_REPA + PARKING + ROW_INSPEC + SEWERS + STREETSW + TREES, 
+    data = cbshape_sf_no_na)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.229193 -0.026548 -0.002535  0.023166  0.217685 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.376e-01  7.841e-04 175.490  < 2e-16 ***
+DRAINAGE    -2.559e-03  7.771e-04  -3.293 0.001002 ** 
+ELECTRICAL  -1.982e-03  6.565e-04  -3.019 0.002555 ** 
+ILLDUMP      7.562e-04  5.043e-05  14.997  < 2e-16 ***
+KOCB         2.625e-03  1.324e-03   1.982 0.047519 *  
+METER_REPA  -1.979e-03  5.696e-04  -3.475 0.000517 ***
+PARKING      5.867e-03  1.390e-03   4.221 2.49e-05 ***
+ROW_INSPEC  -2.246e-03  1.349e-03  -1.664 0.096194 .  
+SEWERS      -1.659e-03  8.853e-04  -1.874 0.061055 .  
+STREETSW    -1.941e-03  2.630e-04  -7.382 1.92e-13 ***
+TREES       -2.882e-03  4.015e-04  -7.177 8.56e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.03565 on 3692 degrees of freedom
+Multiple R-squared:  0.1223,	Adjusted R-squared:  0.1199 
+F-statistic: 51.44 on 10 and 3692 DF,  p-value: < 2.2e-16
+
+[1] "***************BIC***************"
+Start:  AIC=-24596.38
+MH_prevale ~ DRAINAGE + ELECTRICAL + FIRE + ILLDUMP + KOCB + 
+    METER_REPA + PARKING + RECYCLING + ROW_INSPEC + SEWERS + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- FIRE        1  0.000071 4.6916 -24605
+- RECYCLING   1  0.000418 4.6920 -24604
+- ROW_INSPEC  1  0.003424 4.6950 -24602
+- SEWERS      1  0.004378 4.6959 -24601
+- KOCB        1  0.004968 4.6965 -24601
+<none>                    4.6916 -24596
+- ELECTRICAL  1  0.011305 4.7029 -24596
+- DRAINAGE    1  0.013614 4.7052 -24594
+- METER_REPA  1  0.015189 4.7068 -24593
+- PARKING     1  0.022860 4.7144 -24587
+- TREES       1  0.064477 4.7560 -24554
+- STREETSW    1  0.068641 4.7602 -24551
+- ILLDUMP     1  0.204124 4.8957 -24447
+
+Step:  AIC=-24604.54
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + KOCB + METER_REPA + 
+    PARKING + RECYCLING + ROW_INSPEC + SEWERS + STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- RECYCLING   1  0.000419 4.6921 -24612
+- ROW_INSPEC  1  0.003435 4.6951 -24610
+- SEWERS      1  0.004370 4.6960 -24609
+- KOCB        1  0.005005 4.6966 -24609
+<none>                    4.6916 -24605
+- ELECTRICAL  1  0.011378 4.7030 -24604
+- DRAINAGE    1  0.013611 4.7052 -24602
+- METER_REPA  1  0.015149 4.7068 -24601
+- PARKING     1  0.022909 4.7145 -24595
+- TREES       1  0.064504 4.7561 -24562
+- STREETSW    1  0.068595 4.7602 -24559
+- ILLDUMP     1  0.281248 4.9729 -24397
+
+Step:  AIC=-24612.43
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + KOCB + METER_REPA + 
+    PARKING + ROW_INSPEC + SEWERS + STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- ROW_INSPEC  1  0.003519 4.6956 -24618
+- SEWERS      1  0.004462 4.6965 -24617
+- KOCB        1  0.004994 4.6971 -24617
+<none>                    4.6921 -24612
+- ELECTRICAL  1  0.011582 4.7036 -24612
+- DRAINAGE    1  0.013778 4.7058 -24610
+- METER_REPA  1  0.015344 4.7074 -24609
+- PARKING     1  0.022643 4.7147 -24603
+- TREES       1  0.065466 4.7575 -24569
+- STREETSW    1  0.069250 4.7613 -24566
+- ILLDUMP     1  0.285831 4.9779 -24402
+
+Step:  AIC=-24617.87
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + KOCB + METER_REPA + 
+    PARKING + SEWERS + STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- KOCB        1  0.004573 4.7001 -24623
+- SEWERS      1  0.004852 4.7004 -24622
+<none>                    4.6956 -24618
+- ELECTRICAL  1  0.012664 4.7082 -24616
+- DRAINAGE    1  0.015165 4.7107 -24614
+- METER_REPA  1  0.017332 4.7129 -24612
+- PARKING     1  0.022307 4.7179 -24609
+- TREES       1  0.067659 4.7632 -24573
+- STREETSW    1  0.073354 4.7689 -24569
+- ILLDUMP     1  0.285632 4.9812 -24407
+
+Step:  AIC=-24622.48
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + PARKING + 
+    SEWERS + STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- SEWERS      1  0.004669 4.7048 -24627
+<none>                    4.7001 -24623
+- ELECTRICAL  1  0.012296 4.7124 -24621
+- DRAINAGE    1  0.014380 4.7145 -24619
+- METER_REPA  1  0.017171 4.7173 -24617
+- PARKING     1  0.022596 4.7227 -24613
+- TREES       1  0.067461 4.7676 -24578
+- STREETSW    1  0.073573 4.7737 -24573
+- ILLDUMP     1  0.303595 5.0037 -24399
+
+Step:  AIC=-24627.02
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + PARKING + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+<none>                    4.7048 -24627
+- ELECTRICAL  1  0.013299 4.7181 -24625
+- DRAINAGE    1  0.016759 4.7216 -24622
+- METER_REPA  1  0.017090 4.7219 -24622
+- PARKING     1  0.022053 4.7269 -24618
+- TREES       1  0.072920 4.7777 -24578
+- STREETSW    1  0.081741 4.7866 -24572
+- ILLDUMP     1  0.303027 5.0078 -24404
+
+Call:
+lm(formula = MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + 
+    PARKING + STREETSW + TREES, data = cbshape_sf_no_na)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.226300 -0.026340 -0.002781  0.023352  0.218067 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.374e-01  7.669e-04 179.209  < 2e-16 ***
+DRAINAGE    -2.785e-03  7.677e-04  -3.628 0.000290 ***
+ELECTRICAL  -2.113e-03  6.537e-04  -3.232 0.001241 ** 
+ILLDUMP      7.697e-04  4.989e-05  15.427  < 2e-16 ***
+METER_REPA  -2.074e-03  5.662e-04  -3.664 0.000252 ***
+PARKING      5.786e-03  1.390e-03   4.162 3.23e-05 ***
+STREETSW    -2.070e-03  2.584e-04  -8.012 1.50e-15 ***
+TREES       -3.013e-03  3.981e-04  -7.568 4.77e-14 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.03568 on 3695 degrees of freedom
+Multiple R-squared:  0.1199,	Adjusted R-squared:  0.1182 
+F-statistic: 71.92 on 7 and 3695 DF,  p-value: < 2.2e-16
+

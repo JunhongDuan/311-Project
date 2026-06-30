@@ -1,0 +1,141 @@
+Reading layer `data_2021_ready_for_spatialModel' from data source 
+  `C:\Users\jduan\Desktop\CUSC\Data\311_Oakland\data_2021_ready_for_spatialModel.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 6319 features and 56 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 6028230 ymin: 2080208 xmax: 6095715 ymax: 2149507
+Projected CRS: NAD83(2011) / California zone 3 (ftUS)
+[1] "***************AIC***************"
+Start:  AIC=-25028.99
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- METER_REPA  1  0.000419 4.1192 -25031
+- STREETSW    1  0.001405 4.1202 -25030
+<none>                    4.1188 -25029
+- SEWERS      1  0.007611 4.1264 -25024
+- DRAINAGE    1  0.009623 4.1284 -25022
+- ELECTRICAL  1  0.028610 4.1474 -25006
+- TREES       1  0.035646 4.1544 -24999
+- ILLDUMP     1  0.153113 4.2719 -24897
+
+Step:  AIC=-25030.62
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + STREETSW + 
+    TREES
+
+             Df Sum of Sq    RSS    AIC
+- STREETSW    1  0.001362 4.1206 -25031
+<none>                    4.1192 -25031
+- SEWERS      1  0.007637 4.1268 -25026
+- DRAINAGE    1  0.009786 4.1290 -25024
+- ELECTRICAL  1  0.030640 4.1498 -25005
+- TREES       1  0.035764 4.1550 -25001
+- ILLDUMP     1  0.152744 4.2719 -24898
+
+Step:  AIC=-25031.4
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + TREES
+
+             Df Sum of Sq    RSS    AIC
+<none>                    4.1206 -25031
+- SEWERS      1  0.008614 4.1292 -25026
+- DRAINAGE    1  0.011919 4.1325 -25023
+- ELECTRICAL  1  0.032661 4.1532 -25004
+- TREES       1  0.038618 4.1592 -24999
+- ILLDUMP     1  0.151477 4.2720 -24900
+
+Call:
+lm(formula = MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + 
+    TREES, data = cbshape_sf_no_na)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.123266 -0.023960 -0.001202  0.020882  0.207023 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.525e-01  7.099e-04 214.751  < 2e-16 ***
+DRAINAGE    -1.944e-03  5.958e-04  -3.262  0.00112 ** 
+ELECTRICAL  -2.578e-03  4.775e-04  -5.400 7.08e-08 ***
+ILLDUMP      5.882e-04  5.057e-05  11.629  < 2e-16 ***
+SEWERS      -2.007e-03  7.238e-04  -2.773  0.00558 ** 
+TREES       -2.856e-03  4.864e-04  -5.872 4.69e-09 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.03347 on 3679 degrees of freedom
+Multiple R-squared:  0.05711,	Adjusted R-squared:  0.05582 
+F-statistic: 44.56 on 5 and 3679 DF,  p-value: < 2.2e-16
+
+[1] "***************BIC***************"
+Start:  AIC=-24979.29
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- METER_REPA  1  0.000419 4.1192 -24987
+- STREETSW    1  0.001405 4.1202 -24986
+- SEWERS      1  0.007611 4.1264 -24981
+<none>                    4.1188 -24979
+- DRAINAGE    1  0.009623 4.1284 -24979
+- ELECTRICAL  1  0.028610 4.1474 -24962
+- TREES       1  0.035646 4.1544 -24956
+- ILLDUMP     1  0.153113 4.2719 -24853
+
+Step:  AIC=-24987.13
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + STREETSW + 
+    TREES
+
+             Df Sum of Sq    RSS    AIC
+- STREETSW    1  0.001362 4.1206 -24994
+- SEWERS      1  0.007637 4.1268 -24989
+<none>                    4.1192 -24987
+- DRAINAGE    1  0.009786 4.1290 -24987
+- ELECTRICAL  1  0.030640 4.1498 -24968
+- TREES       1  0.035764 4.1550 -24964
+- ILLDUMP     1  0.152744 4.2719 -24861
+
+Step:  AIC=-24994.13
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + TREES
+
+             Df Sum of Sq    RSS    AIC
+- SEWERS      1  0.008614 4.1292 -24995
+<none>                    4.1206 -24994
+- DRAINAGE    1  0.011919 4.1325 -24992
+- ELECTRICAL  1  0.032661 4.1532 -24973
+- TREES       1  0.038618 4.1592 -24968
+- ILLDUMP     1  0.151477 4.2720 -24869
+
+Step:  AIC=-24994.64
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + TREES
+
+             Df Sum of Sq    RSS    AIC
+<none>                    4.1292 -24995
+- DRAINAGE    1  0.017627 4.1468 -24987
+- ELECTRICAL  1  0.036396 4.1656 -24971
+- TREES       1  0.043814 4.1730 -24964
+- ILLDUMP     1  0.147717 4.2769 -24873
+
+Call:
+lm(formula = MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + TREES, 
+    data = cbshape_sf_no_na)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.122961 -0.024220 -0.001246  0.021143  0.207328 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.522e-01  7.025e-04 216.604  < 2e-16 ***
+DRAINAGE    -2.306e-03  5.819e-04  -3.964 7.53e-05 ***
+ELECTRICAL  -2.709e-03  4.756e-04  -5.695 1.33e-08 ***
+ILLDUMP      5.798e-04  5.053e-05  11.474  < 2e-16 ***
+TREES       -3.020e-03  4.832e-04  -6.249 4.61e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.0335 on 3680 degrees of freedom
+Multiple R-squared:  0.05514,	Adjusted R-squared:  0.05411 
+F-statistic: 53.68 on 4 and 3680 DF,  p-value: < 2.2e-16
+

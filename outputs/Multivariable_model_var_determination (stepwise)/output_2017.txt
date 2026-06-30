@@ -1,0 +1,100 @@
+Reading layer `data_2017_ready_for_spatialModel' from data source 
+  `C:\Users\jduan\Desktop\CUSC\Data\311_Oakland\data_2017_ready_for_spatialModel.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 6319 features and 52 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 6028230 ymin: 2080208 xmax: 6095715 ymax: 2149507
+Projected CRS: NAD83(2011) / California zone 3 (ftUS)
+[1] "***************AIC***************"
+Start:  AIC=-24662.67
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+<none>                    4.7227 -24663
+- SEWERS      1   0.00413 4.7269 -24661
+- ELECTRICAL  1   0.01139 4.7341 -24656
+- METER_REPA  1   0.01526 4.7380 -24653
+- DRAINAGE    1   0.01577 4.7385 -24652
+- TREES       1   0.06637 4.7891 -24613
+- STREETSW    1   0.06910 4.7918 -24611
+- ILLDUMP     1   0.32361 5.0464 -24419
+
+Call:
+lm(formula = MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + 
+    SEWERS + STREETSW + TREES, data = cbshape_sf_no_na)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.237338 -0.026464 -0.002904  0.023575  0.217164 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.380e-01  7.697e-04 179.343  < 2e-16 ***
+DRAINAGE    -2.722e-03  7.747e-04  -3.513 0.000449 ***
+ELECTRICAL  -1.958e-03  6.559e-04  -2.985 0.002852 ** 
+ILLDUMP      7.914e-04  4.974e-05  15.912  < 2e-16 ***
+METER_REPA  -1.957e-03  5.666e-04  -3.455 0.000557 ***
+SEWERS      -1.592e-03  8.864e-04  -1.797 0.072483 .  
+STREETSW    -1.925e-03  2.618e-04  -7.353 2.38e-13 ***
+TREES       -2.896e-03  4.018e-04  -7.206 6.95e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.03575 on 3695 degrees of freedom
+Multiple R-squared:  0.1166,	Adjusted R-squared:  0.1149 
+F-statistic: 69.64 on 7 and 3695 DF,  p-value: < 2.2e-16
+
+[1] "***************BIC***************"
+Start:  AIC=-24612.94
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- SEWERS      1   0.00413 4.7269 -24618
+<none>                    4.7227 -24613
+- ELECTRICAL  1   0.01139 4.7341 -24612
+- METER_REPA  1   0.01526 4.7380 -24609
+- DRAINAGE    1   0.01577 4.7385 -24609
+- TREES       1   0.06637 4.7891 -24570
+- STREETSW    1   0.06910 4.7918 -24567
+- ILLDUMP     1   0.32361 5.0464 -24376
+
+Step:  AIC=-24617.92
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + STREETSW + 
+    TREES
+
+             Df Sum of Sq    RSS    AIC
+<none>                    4.7269 -24618
+- ELECTRICAL  1   0.01231 4.7392 -24617
+- METER_REPA  1   0.01521 4.7421 -24614
+- DRAINAGE    1   0.01811 4.7450 -24612
+- TREES       1   0.07153 4.7984 -24571
+- STREETSW    1   0.07671 4.8036 -24567
+- ILLDUMP     1   0.32287 5.0497 -24382
+
+Call:
+lm(formula = MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + 
+    STREETSW + TREES, data = cbshape_sf_no_na)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.235115 -0.026445 -0.002846  0.023349  0.217438 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.378e-01  7.619e-04 180.933  < 2e-16 ***
+DRAINAGE    -2.894e-03  7.690e-04  -3.763 0.000170 ***
+ELECTRICAL  -2.032e-03  6.548e-04  -3.103 0.001932 ** 
+ILLDUMP      7.905e-04  4.975e-05  15.889  < 2e-16 ***
+METER_REPA  -1.954e-03  5.667e-04  -3.448 0.000571 ***
+STREETSW    -2.002e-03  2.585e-04  -7.745 1.23e-14 ***
+TREES       -2.984e-03  3.989e-04  -7.479 9.32e-14 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.03576 on 3696 degrees of freedom
+Multiple R-squared:  0.1158,	Adjusted R-squared:  0.1144 
+F-statistic: 80.66 on 6 and 3696 DF,  p-value: < 2.2e-16
+

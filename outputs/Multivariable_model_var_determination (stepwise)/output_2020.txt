@@ -1,0 +1,110 @@
+Reading layer `data_2020_ready_for_spatialModel' from data source 
+  `C:\Users\jduan\Desktop\CUSC\Data\311_Oakland\data_2020_ready_for_spatialModel.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 6319 features and 55 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: 6028230 ymin: 2080208 xmax: 6095715 ymax: 2149507
+Projected CRS: NAD83(2011) / California zone 3 (ftUS)
+[1] "***************AIC***************"
+Start:  AIC=-26333.88
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+<none>                    2.7896 -26334
+- STREETSW    1  0.001724 2.7914 -26334
+- METER_REPA  1  0.002804 2.7924 -26332
+- TREES       1  0.006729 2.7964 -26327
+- DRAINAGE    1  0.008555 2.7982 -26325
+- SEWERS      1  0.008695 2.7983 -26325
+- ELECTRICAL  1  0.022931 2.8126 -26306
+- ILLDUMP     1  0.089417 2.8791 -26220
+
+Call:
+lm(formula = MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + 
+    SEWERS + STREETSW + TREES, data = cbshape_sf_no_na)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.115079 -0.019340  0.000245  0.017805  0.159456 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.408e-01  5.948e-04 236.672  < 2e-16 ***
+DRAINAGE    -3.313e-03  9.886e-04  -3.351 0.000814 ***
+ELECTRICAL  -2.723e-03  4.963e-04  -5.486  4.4e-08 ***
+ILLDUMP      3.562e-04  3.288e-05  10.833  < 2e-16 ***
+METER_REPA  -1.362e-03  7.097e-04  -1.918 0.055145 .  
+SEWERS      -2.751e-03  8.144e-04  -3.378 0.000738 ***
+STREETSW    -5.250e-04  3.490e-04  -1.504 0.132604    
+TREES       -1.292e-03  4.346e-04  -2.972 0.002981 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.0276 on 3661 degrees of freedom
+Multiple R-squared:  0.05089,	Adjusted R-squared:  0.04907 
+F-statistic: 28.04 on 7 and 3661 DF,  p-value: < 2.2e-16
+
+[1] "***************BIC***************"
+Start:  AIC=-26284.22
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + 
+    STREETSW + TREES
+
+             Df Sum of Sq    RSS    AIC
+- STREETSW    1  0.001724 2.7914 -26290
+- METER_REPA  1  0.002804 2.7924 -26289
+<none>                    2.7896 -26284
+- TREES       1  0.006729 2.7964 -26284
+- DRAINAGE    1  0.008555 2.7982 -26281
+- SEWERS      1  0.008695 2.7983 -26281
+- ELECTRICAL  1  0.022931 2.8126 -26262
+- ILLDUMP     1  0.089417 2.8791 -26177
+
+Step:  AIC=-26290.16
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + METER_REPA + SEWERS + 
+    TREES
+
+             Df Sum of Sq    RSS    AIC
+- METER_REPA  1  0.002831 2.7942 -26295
+<none>                    2.7914 -26290
+- TREES       1  0.007955 2.7993 -26288
+- DRAINAGE    1  0.009476 2.8008 -26286
+- SEWERS      1  0.009952 2.8013 -26285
+- ELECTRICAL  1  0.023999 2.8154 -26267
+- ILLDUMP     1  0.088108 2.8795 -26184
+
+Step:  AIC=-26294.65
+MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + TREES
+
+             Df Sum of Sq    RSS    AIC
+<none>                    2.7942 -26295
+- TREES       1  0.008054 2.8022 -26292
+- SEWERS      1  0.009520 2.8037 -26290
+- DRAINAGE    1  0.010482 2.8047 -26289
+- ELECTRICAL  1  0.027660 2.8219 -26267
+- ILLDUMP     1  0.088641 2.8828 -26188
+
+Call:
+lm(formula = MH_prevale ~ DRAINAGE + ELECTRICAL + ILLDUMP + SEWERS + 
+    TREES, data = cbshape_sf_no_na)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.114844 -0.019390  0.000235  0.017932  0.159908 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  1.405e-01  5.829e-04 241.098  < 2e-16 ***
+DRAINAGE    -3.633e-03  9.800e-04  -3.707 0.000213 ***
+ELECTRICAL  -2.939e-03  4.881e-04  -6.022  1.9e-09 ***
+ILLDUMP      3.537e-04  3.281e-05  10.780  < 2e-16 ***
+SEWERS      -2.850e-03  8.066e-04  -3.533 0.000416 ***
+TREES       -1.397e-03  4.300e-04  -3.249 0.001167 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.02762 on 3663 degrees of freedom
+Multiple R-squared:  0.04934,	Adjusted R-squared:  0.04804 
+F-statistic: 38.02 on 5 and 3663 DF,  p-value: < 2.2e-16
+
