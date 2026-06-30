@@ -1,0 +1,392 @@
+SAE -  使用county数据集合成的MMSA poverty数据重新拟合+预测
+
+year = 2015
+'data.frame':	221073 obs. of  12 variables:
+ $ AGE              : num  2 11 9 13 8 13 12 10 10 13 ...
+ $ SEX              : num  1 2 1 2 1 2 2 1 2 2 ...
+ $ RACE             : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ MENTLE           : int  0 0 0 0 0 0 0 0 0 0 ...
+ $ MMSANAME         : chr  "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" ...
+ $ X_MMSA           : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+ $ X_MMSAWT         : num  107.52 35.22 35.49 9.98 16.57 ...
+ $ STATE            : chr  "SD" "SD" "SD" "SD" ...
+ $ match_county_list: chr  "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" ...
+ $ S1701_C01_001E   : num  80826 80826 80826 80826 80826 ...
+ $ S1701_C01_040E   : num  11930 11930 11930 11930 11930 ...
+ $ PER_LOWPOVERTY   : num  0.148 0.148 0.148 0.148 0.148 ...
+ Family: binomial  ( logit )
+Formula:          MENTLE ~ AGE + SEX + RACE + PER_LOWPOVERTY + (1 | MMSA) + (1 |      STATE)
+Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+  139218   139455   -69586   139172   221050 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ MMSA   (Intercept) 0.006658 0.0816  
+ STATE  (Intercept) 0.013017 0.1141  
+Number of obs: 221073, groups:  MMSA, 130; STATE, 73
+
+Conditional model:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -2.55575    0.08457 -30.220  < 2e-16 ***
+AGE2           -0.07769    0.04015  -1.935  0.05297 .  
+AGE3           -0.11749    0.03909  -3.006  0.00265 ** 
+AGE4           -0.17124    0.03892  -4.400 1.08e-05 ***
+AGE5           -0.16686    0.03825  -4.363 1.28e-05 ***
+AGE6           -0.08995    0.03639  -2.472  0.01344 *  
+AGE7           -0.07833    0.03452  -2.269  0.02325 *  
+AGE8           -0.10968    0.03394  -3.231  0.00123 ** 
+AGE9           -0.26961    0.03439  -7.839 4.54e-15 ***
+AGE10          -0.58506    0.03625 -16.141  < 2e-16 ***
+AGE11          -0.80538    0.04057 -19.854  < 2e-16 ***
+AGE12          -0.85568    0.04519 -18.937  < 2e-16 ***
+AGE13          -1.00096    0.04315 -23.197  < 2e-16 ***
+SEX2            0.38818    0.01507  25.753  < 2e-16 ***
+RACE2           0.09671    0.02382   4.060 4.90e-05 ***
+RACE3           0.55870    0.05361  10.422  < 2e-16 ***
+RACE4          -0.66318    0.05844 -11.348  < 2e-16 ***
+RACE5           0.02090    0.13458   0.155  0.87657    
+RACE6           0.04239    0.04782   0.886  0.37545    
+RACE7           0.54563    0.04498  12.132  < 2e-16 ***
+PER_LOWPOVERTY  2.61506    0.48313   5.413 6.21e-08 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+year = 2016
+'data.frame':	235769 obs. of  12 variables:
+ $ AGE              : num  1 1 3 5 8 2 6 2 2 1 ...
+ $ SEX              : num  2 1 1 1 1 1 2 2 1 2 ...
+ $ RACE             : num  1 4 1 4 1 1 1 7 1 1 ...
+ $ MENTLE           : num  1 1 0 0 0 0 1 1 0 1 ...
+ $ MMSANAME         : chr  "Albany-Schenectady-Troy, NY, Metro Statistical Area" "Albany-Schenectady-Troy, NY, Metro Statistical Area" "Albany-Schenectady-Troy, NY, Metro Statistical Area" "Albany-Schenectady-Troy, NY, Metro Statistical Area" ...
+ $ X_MMSA           : int  10580 10580 10580 10580 10580 10580 10580 10580 10580 10580 ...
+ $ X_MMSAWT         : num  891 286 581 158 265 ...
+ $ STATE            : chr  "NY" "NY" "NY" "NY" ...
+ $ match_county_list: chr  "['36001', '36083', '36091', '36093', '36095']" "['36001', '36083', '36091', '36093', '36095']" "['36001', '36083', '36091', '36093', '36095']" "['36001', '36083', '36091', '36093', '36095']" ...
+ $ S1701_C01_001E   : num  1694748 1694748 1694748 1694748 1694748 ...
+ $ S1701_C01_040E   : num  300999 300999 300999 300999 300999 ...
+ $ PER_LOWPOVERTY   : num  0.178 0.178 0.178 0.178 0.178 ...
+ Family: binomial  ( logit )
+Formula:          MENTLE ~ AGE + SEX + RACE + PER_LOWPOVERTY + (1 | MMSA) + (1 |      STATE)
+Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+153871.0 154109.5 -76912.5 153825.0   235746 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ MMSA   (Intercept) 0.007873 0.08873 
+ STATE  (Intercept) 0.015205 0.12331 
+Number of obs: 235769, groups:  MMSA, 143; STATE, 74
+
+Conditional model:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -2.390970   0.065375  -36.57  < 2e-16 ***
+AGE2           -0.060826   0.036076   -1.69  0.09179 .  
+AGE3           -0.175200   0.036146   -4.85 1.25e-06 ***
+AGE4           -0.217905   0.035901   -6.07 1.28e-09 ***
+AGE5           -0.256543   0.036234   -7.08 1.44e-12 ***
+AGE6           -0.176682   0.033917   -5.21 1.90e-07 ***
+AGE7           -0.196466   0.032504   -6.04 1.50e-09 ***
+AGE8           -0.203511   0.031663   -6.43 1.30e-10 ***
+AGE9           -0.377591   0.032015  -11.79  < 2e-16 ***
+AGE10          -0.660754   0.033469  -19.74  < 2e-16 ***
+AGE11          -0.862256   0.037129  -23.22  < 2e-16 ***
+AGE12          -0.947978   0.042031  -22.55  < 2e-16 ***
+AGE13          -1.096353   0.040544  -27.04  < 2e-16 ***
+SEX2            0.413690   0.014195   29.14  < 2e-16 ***
+RACE2           0.055545   0.022296    2.49  0.01273 *  
+RACE3           0.496209   0.051761    9.59  < 2e-16 ***
+RACE4          -0.604144   0.055594  -10.87  < 2e-16 ***
+RACE5           0.340518   0.113850    2.99  0.00278 ** 
+RACE6          -0.004519   0.045119   -0.10  0.92022    
+RACE7           0.597699   0.041536   14.39  < 2e-16 ***
+PER_LOWPOVERTY  1.686555   0.250766    6.73 1.75e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+year = 2017
+'data.frame':	218099 obs. of  12 variables:
+ $ AGE              : num  9 10 1 2 13 3 10 13 13 13 ...
+ $ SEX              : num  1 2 1 2 2 1 2 2 2 2 ...
+ $ RACE             : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ MENTLE           : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ MMSANAME         : chr  "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" ...
+ $ X_MMSA           : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+ $ X_MMSAWT         : num  110.2 28.6 115.6 376 20.7 ...
+ $ STATE            : chr  "SD" "SD" "SD" "SD" ...
+ $ match_county_list: chr  "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" ...
+ $ S1701_C01_001E   : num  82296 82296 82296 82296 82296 ...
+ $ S1701_C01_040E   : num  15522 15522 15522 15522 15522 ...
+ $ PER_LOWPOVERTY   : num  0.189 0.189 0.189 0.189 0.189 ...
+ Family: binomial  ( logit )
+Formula:          MENTLE ~ AGE + SEX + RACE + PER_LOWPOVERTY + (1 | MMSA) + (1 |      STATE)
+Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+146832.2 147068.9 -73393.1 146786.2   218076 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ MMSA   (Intercept) 0.013312 0.11538 
+ STATE  (Intercept) 0.008235 0.09075 
+Number of obs: 218099, groups:  MMSA, 136; STATE, 74
+
+Conditional model:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -2.17930    0.06563  -33.20  < 2e-16 ***
+AGE2           -0.19524    0.03525   -5.54 3.06e-08 ***
+AGE3           -0.33091    0.03546   -9.33  < 2e-16 ***
+AGE4           -0.32706    0.03486   -9.38  < 2e-16 ***
+AGE5           -0.39080    0.03567  -10.96  < 2e-16 ***
+AGE6           -0.37645    0.03398  -11.08  < 2e-16 ***
+AGE7           -0.33042    0.03218  -10.27  < 2e-16 ***
+AGE8           -0.32416    0.03096  -10.47  < 2e-16 ***
+AGE9           -0.51502    0.03144  -16.38  < 2e-16 ***
+AGE10          -0.77697    0.03293  -23.59  < 2e-16 ***
+AGE11          -1.03308    0.03660  -28.22  < 2e-16 ***
+AGE12          -1.19293    0.04296  -27.77  < 2e-16 ***
+AGE13          -1.25194    0.04050  -30.91  < 2e-16 ***
+SEX2            0.41566    0.01440   28.87  < 2e-16 ***
+RACE2           0.07980    0.02247    3.55 0.000383 ***
+RACE3           0.48430    0.05014    9.66  < 2e-16 ***
+RACE4          -0.61469    0.05568  -11.04  < 2e-16 ***
+RACE5           0.10924    0.11480    0.95 0.341303    
+RACE6           0.04400    0.04338    1.01 0.310352    
+RACE7           0.55847    0.04023   13.88  < 2e-16 ***
+PER_LOWPOVERTY  1.63497    0.26355    6.20 5.52e-10 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+year = 2018
+'data.frame':	207905 obs. of  12 variables:
+ $ AGE              : num  2 8 1 11 4 1 11 12 7 6 ...
+ $ SEX              : num  2 2 2 1 1 2 1 2 1 2 ...
+ $ RACE             : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ MENTLE           : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ MMSANAME         : chr  "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" ...
+ $ X_MMSA           : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+ $ X_MMSAWT         : num  108.2 78.5 173.2 68.9 124.4 ...
+ $ STATE            : chr  "SD" "SD" "SD" "SD" ...
+ $ match_county_list: chr  "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" ...
+ $ S1701_C01_001E   : num  82693 82693 82693 82693 82693 ...
+ $ S1701_C01_040E   : num  15405 15405 15405 15405 15405 ...
+ $ PER_LOWPOVERTY   : num  0.186 0.186 0.186 0.186 0.186 ...
+ Family: binomial  ( logit )
+Formula:          MENTLE ~ AGE + SEX + RACE + PER_LOWPOVERTY + (1 | MMSA) + (1 |      STATE)
+Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+142121.4 142357.0 -71037.7 142075.4   207882 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ MMSA   (Intercept) 0.002622 0.05121 
+ STATE  (Intercept) 0.017794 0.13339 
+Number of obs: 207905, groups:  MMSA, 134; STATE, 71
+
+Conditional model:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -2.00749    0.05778  -34.74  < 2e-16 ***
+AGE2           -0.19064    0.03384   -5.63 1.76e-08 ***
+AGE3           -0.36447    0.03430  -10.63  < 2e-16 ***
+AGE4           -0.44284    0.03439  -12.88  < 2e-16 ***
+AGE5           -0.49368    0.03511  -14.06  < 2e-16 ***
+AGE6           -0.45941    0.03380  -13.59  < 2e-16 ***
+AGE7           -0.48009    0.03233  -14.85  < 2e-16 ***
+AGE8           -0.43600    0.03098  -14.07  < 2e-16 ***
+AGE9           -0.64064    0.03156  -20.30  < 2e-16 ***
+AGE10          -0.92444    0.03342  -27.66  < 2e-16 ***
+AGE11          -1.11775    0.03640  -30.71  < 2e-16 ***
+AGE12          -1.21115    0.04207  -28.79  < 2e-16 ***
+AGE13          -1.36978    0.04133  -33.15  < 2e-16 ***
+SEX2            0.38822    0.01445   26.86  < 2e-16 ***
+RACE2           0.07525    0.02244    3.35  0.00080 ***
+RACE3           0.57724    0.04932   11.70  < 2e-16 ***
+RACE4          -0.66236    0.05507  -12.03  < 2e-16 ***
+RACE5           0.12293    0.11705    1.05  0.29361    
+RACE6           0.10115    0.03909    2.59  0.00966 ** 
+RACE7           0.55442    0.04101   13.52  < 2e-16 ***
+PER_LOWPOVERTY  1.51654    0.22830    6.64 3.08e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+year = 2019
+'data.frame':	197721 obs. of  12 variables:
+ $ AGE              : num  3 4 7 6 5 1 8 13 12 11 ...
+ $ SEX              : num  1 1 1 2 1 1 1 2 2 1 ...
+ $ RACE             : num  1 1 1 1 1 1 3 1 1 1 ...
+ $ MENTLE           : num  0 0 1 0 0 0 0 0 0 0 ...
+ $ MMSANAME         : chr  "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" ...
+ $ X_MMSA           : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+ $ X_MMSAWT         : num  111.2 147.7 68.3 209.3 81.7 ...
+ $ STATE            : chr  "SD" "SD" "SD" "SD" ...
+ $ match_county_list: chr  "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" ...
+ $ S1701_C01_001E   : num  83019 83019 83019 83019 83019 ...
+ $ S1701_C01_040E   : num  14722 14722 14722 14722 14722 ...
+ $ PER_LOWPOVERTY   : num  0.177 0.177 0.177 0.177 0.177 ...
+ Family: binomial  ( logit )
+Formula:          MENTLE ~ AGE + SEX + RACE + PER_LOWPOVERTY + (1 | MMSA) + (1 |      STATE)
+Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+139938.4 140172.8 -69946.2 139892.4   197698 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ MMSA   (Intercept) 0.006718 0.08196 
+ STATE  (Intercept) 0.018145 0.13470 
+Number of obs: 197721, groups:  MMSA, 136; STATE, 71
+
+Conditional model:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -1.77854    0.06158  -28.88  < 2e-16 ***
+AGE2           -0.17894    0.03332   -5.37 7.83e-08 ***
+AGE3           -0.33474    0.03348  -10.00  < 2e-16 ***
+AGE4           -0.43715    0.03384  -12.92  < 2e-16 ***
+AGE5           -0.56524    0.03487  -16.21  < 2e-16 ***
+AGE6           -0.52959    0.03410  -15.53  < 2e-16 ***
+AGE7           -0.55001    0.03250  -16.93  < 2e-16 ***
+AGE8           -0.54299    0.03118  -17.42  < 2e-16 ***
+AGE9           -0.75844    0.03163  -23.98  < 2e-16 ***
+AGE10          -1.02230    0.03333  -30.68  < 2e-16 ***
+AGE11          -1.16982    0.03533  -33.11  < 2e-16 ***
+AGE12          -1.29870    0.04091  -31.74  < 2e-16 ***
+AGE13          -1.45234    0.04008  -36.24  < 2e-16 ***
+SEX2            0.41028    0.01450   28.29  < 2e-16 ***
+RACE2           0.02100    0.02351    0.89   0.3717    
+RACE3           0.43791    0.05390    8.13 4.47e-16 ***
+RACE4          -0.66988    0.05677  -11.80  < 2e-16 ***
+RACE5           0.26271    0.11704    2.24   0.0248 *  
+RACE6          -0.02134    0.03812   -0.56   0.5756    
+RACE7           0.48926    0.04106   11.92  < 2e-16 ***
+PER_LOWPOVERTY  1.03886    0.25481    4.08 4.56e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+year = 2020
+'data.frame':	181910 obs. of  12 variables:
+ $ AGE              : num  1 5 13 6 12 12 12 7 13 8 ...
+ $ SEX              : num  2 1 2 2 2 1 1 1 1 2 ...
+ $ RACE             : num  1 2 1 1 1 1 1 1 1 1 ...
+ $ MENTLE           : num  1 0 0 0 0 0 0 0 0 0 ...
+ $ MMSANAME         : chr  "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" ...
+ $ X_MMSA           : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+ $ X_MMSAWT         : num  159.11 1061.02 7.44 66.95 22.39 ...
+ $ STATE            : chr  "SD" "SD" "SD" "SD" ...
+ $ match_county_list: chr  "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" ...
+ $ S1701_C01_001E   : num  83096 83096 83096 83096 83096 ...
+ $ S1701_C01_040E   : num  13417 13417 13417 13417 13417 ...
+ $ PER_LOWPOVERTY   : num  0.161 0.161 0.161 0.161 0.161 ...
+ Family: binomial  ( logit )
+Formula:          MENTLE ~ AGE + SEX + RACE + PER_LOWPOVERTY + (1 | MMSA) + (1 |      STATE)
+Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+131594.1 131826.6 -65774.0 131548.1   181887 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ MMSA   (Intercept) 0.009615 0.09806 
+ STATE  (Intercept) 0.012087 0.10994 
+Number of obs: 181910, groups:  MMSA, 118; STATE, 71
+
+Conditional model:
+               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -1.81877    0.06388  -28.47  < 2e-16 ***
+AGE2           -0.13762    0.03350   -4.11 3.99e-05 ***
+AGE3           -0.30689    0.03382   -9.08  < 2e-16 ***
+AGE4           -0.32977    0.03318   -9.94  < 2e-16 ***
+AGE5           -0.42865    0.03385  -12.66  < 2e-16 ***
+AGE6           -0.54317    0.03446  -15.76  < 2e-16 ***
+AGE7           -0.56548    0.03323  -17.02  < 2e-16 ***
+AGE8           -0.61450    0.03264  -18.82  < 2e-16 ***
+AGE9           -0.73021    0.03261  -22.39  < 2e-16 ***
+AGE10          -0.99739    0.03488  -28.60  < 2e-16 ***
+AGE11          -1.15867    0.03732  -31.05  < 2e-16 ***
+AGE12          -1.27990    0.04385  -29.19  < 2e-16 ***
+AGE13          -1.47611    0.04351  -33.93  < 2e-16 ***
+SEX2            0.54132    0.01500   36.09  < 2e-16 ***
+RACE2           0.03921    0.02377    1.65  0.09905 .  
+RACE3           0.41891    0.05674    7.38 1.55e-13 ***
+RACE4          -0.57217    0.05172  -11.06  < 2e-16 ***
+RACE5          -0.04494    0.13752   -0.33  0.74384    
+RACE6           0.04497    0.03779    1.19  0.23414    
+RACE7           0.39214    0.04237    9.25  < 2e-16 ***
+PER_LOWPOVERTY  0.82888    0.28274    2.93  0.00337 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+
+year = 2021
+'data.frame':	212112 obs. of  12 variables:
+ $ AGE              : num  5 6 5 3 8 11 9 10 9 10 ...
+ $ SEX              : num  1 1 2 1 2 1 1 2 1 2 ...
+ $ RACE             : num  1 1 1 1 1 1 1 1 1 1 ...
+ $ MENTLE           : num  0 0 0 0 0 0 0 0 0 0 ...
+ $ MMSANAME         : chr  "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" "Aberdeen, SD, Mirco Statistical Area" ...
+ $ X_MMSA           : int  10100 10100 10100 10100 10100 10100 10100 10100 10100 10100 ...
+ $ X_MMSAWT         : num  90 29.6 37 49.7 15.4 ...
+ $ STATE            : chr  "SD" "SD" "SD" "SD" ...
+ $ match_county_list: chr  "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" "['46013', '46045']" ...
+ $ S1701_C01_001E   : num  82861 82861 82861 82861 82861 ...
+ $ S1701_C01_040E   : num  13238 13238 13238 13238 13238 ...
+ $ PER_LOWPOVERTY   : num  0.16 0.16 0.16 0.16 0.16 ...
+ Family: binomial  ( logit )
+Formula:          MENTLE ~ AGE + SEX + RACE + PER_LOWPOVERTY + (1 | MMSA) + (1 |      STATE)
+Data: data
+
+     AIC      BIC   logLik deviance df.resid 
+157960.1 158196.2 -78957.1 157914.1   212089 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ MMSA   (Intercept) 0.006307 0.07942 
+ STATE  (Intercept) 0.014488 0.12036 
+Number of obs: 212112, groups:  MMSA, 126; STATE, 69
+
+Conditional model:
+                Estimate Std. Error z value Pr(>|z|)    
+(Intercept)    -1.631013   0.057834  -28.20  < 2e-16 ***
+AGE2           -0.171237   0.030791   -5.56 2.68e-08 ***
+AGE3           -0.340250   0.030213  -11.26  < 2e-16 ***
+AGE4           -0.492400   0.030309  -16.25  < 2e-16 ***
+AGE5           -0.577772   0.030580  -18.89  < 2e-16 ***
+AGE6           -0.708064   0.031903  -22.19  < 2e-16 ***
+AGE7           -0.683494   0.030223  -22.61  < 2e-16 ***
+AGE8           -0.780453   0.030260  -25.79  < 2e-16 ***
+AGE9           -0.841513   0.029763  -28.27  < 2e-16 ***
+AGE10          -1.209739   0.032136  -37.64  < 2e-16 ***
+AGE11          -1.296903   0.033440  -38.78  < 2e-16 ***
+AGE12          -1.421533   0.039131  -36.33  < 2e-16 ***
+AGE13          -1.611799   0.039611  -40.69  < 2e-16 ***
+SEX2            0.485632   0.013515   35.93  < 2e-16 ***
+RACE2           0.022165   0.021780    1.02   0.3088    
+RACE3           0.311813   0.050980    6.12 9.58e-10 ***
+RACE4          -0.617514   0.044933  -13.74  < 2e-16 ***
+RACE5           0.009639   0.116701    0.08   0.9342    
+RACE6          -0.061500   0.035667   -1.72   0.0847 .  
+RACE7           0.440711   0.036931   11.93  < 2e-16 ***
+PER_LOWPOVERTY  1.146244   0.257436    4.45 8.49e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
